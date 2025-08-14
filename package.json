@@ -1,0 +1,24 @@
+{
+  "name": "portfolio_2025",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run project_repo\" \"npm run open-server\" \"npm run open-client\" \"npm run open-project-repo\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "project_repo": "cd project_repo && npm start",
+    "open-client": "wait-on http://localhost:3700 && npx open-cli http://localhost:3700",
+    "open-project-repo": "wait-on http://localhost:3600 && npx open-cli http://localhost:3600"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.45.2",
+    "concurrently": "^9.1.2"
+  },
+  "devDependencies": {
+    "open-cli": "^8.0.0",
+    "wait-on": "^8.0.3"
+  }
+}
