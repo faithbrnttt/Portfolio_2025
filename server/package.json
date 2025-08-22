@@ -18,6 +18,7 @@
     "multer-s3": "^3.0.1"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "^1.45.2"
+    "@dotenvx/dotenvx": "^1.45.2",
+    "cors": "^2.8.5"
   }
 }

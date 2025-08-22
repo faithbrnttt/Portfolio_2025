@@ -2,9 +2,9 @@ const express = require('express');
 require('@dotenvx/dotenvx').config();
 const cors = require('cors');
 const morgan = require('morgan');
-const projectRoutes = require('../routes/projectRoutes');
-const { errorHandler } = require('../middleware/errorHandler');
-const connectDB = require('../config/db');
+const projectRoutes = require('./routes/projectRoutes');
+const { errorHandler } = require('./middleware/errorHandler');
+const connectDB = require('./config/db');
 
 
 connectDB();

@@ -1,12 +1,12 @@
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const s3 = require('../config/s3');
-const { S3_BUCKET_NAME } = process.env;
+const { AWS_BUCKET } = process.env;
 
 const upload = multer({
     storage: multerS3({
         s3,
-        bucket: S3_BUCKET_NAME,
+        bucket: AWS_BUCKET,
         metadata: (req, file, cb) => {
             cb(null, { fieldName: file.fieldname });
         },

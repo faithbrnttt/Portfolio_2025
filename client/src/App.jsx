@@ -47,7 +47,7 @@ function App() {
 
       </div>
       <div className="rejects">
-        <p className="reject1">Hello FAITH BURNETT Thank you for submitting your application for the above referenced position. We regret to inform you that you were not selected for this role. We believe your skills and background could be a great fit for future opportunities and encourage you to stay in touch. Wishing you great success, Global Talent Acquisition</p>
+        <p className="reject1">Hello FAITH BURNETT Thank you for submitting your application for the above referenced position. We regret to inform you that you were not selected for this role. We believe your skills and background could be a great fit for future opportunities and encourage you to stay in touch. Wishing you great success, Acquisition</p>
         <p className="reject2">Dear Faith,
 
           Thank you for allowing us the opportunity to consider you for employment by applying for a Software Development Intern - Python and Linux position. We recognize that there are many employers for you to choose from, and we sincerely appreciate your time and interest in our company.
@@ -55,7 +55,7 @@ function App() {
           We were fortunate to receive a large volume of qualified applications, and we regret to inform you that this particular position is no longer vacant. If you haven't already, we hope you will connect with us on LinkedIn, and we encourage you to apply for other openings at our company that may interest you.
 
           Sincerely,
-          Global Talent Acquisition Team</p>
+          Acquisition Team</p>
         <p className="reject3">Hello Faith -
 
           Thank you for your interest in the 308729 Full Stack Software Developer - Early Career position. Your interest is genuinely appreciated. After careful consideration, we regret to inform you that you have not been selected for this position. We encourage you to continue to review and apply for other opportunities.
@@ -64,7 +64,7 @@ function App() {
 
 
           Best Regards,
-          Talent Acquisition Team</p>
+          Acquisition Team</p>
         <p className="reject4">Hi Faith,
 
           Thank you for your recent application for the position of Graduate Software Developer. We appreciate the time you put into your application.
@@ -96,7 +96,7 @@ function App() {
         <p className="reject6">
           Hello Faith,
 
-          Thank you for considering Fetch as the next step in your professional journey.
+          Thank you for considering ----- as the next step in your professional journey.
 
           Our Recruitment team has reviewed your resume for Frontend Engineering Apprentice. After careful consideration, we are moving forward with candidates who are closely aligned with their requirements.
 
