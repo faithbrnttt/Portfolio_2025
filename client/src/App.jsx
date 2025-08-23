@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Nav from './components/Nav'
-
+import projects from './assets/projects.png'
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,13 +20,13 @@ function App() {
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >
-            <FontAwesomeIcon icon={faBars} />
+              <FontAwesomeIcon icon={faBars} />
             </button>
             <div className={`nav-content ${menuOpen ? 'open' : ''}`}>
-              <Nav closeMenu={() => setMenuOpen(false)}/>
+              <Nav closeMenu={() => setMenuOpen(false)} />
             </div>
           </div>
-          
+
         </div>
       </div>
       <div class="container">
@@ -112,177 +112,107 @@ function App() {
         <div className="item9"></div>
         <div className="item10"></div>
       </div>
+      <div className="project-title">
+        <img src={projects}></img>
+      </div>
       <div className="body-container">
 
-
         <div className="item11">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item12">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item13">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item14">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item15">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item16">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item17">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item18">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
         <div className="item19">
-          <div className="card">
-            <div className="slide slide1">
-              <div className="content">
-                <div class="icon">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="slide slide2">
-              <div className="content">
-                <h3>
-                  Hello there!
-                </h3>
-                <p>Trust yourself and keep going.</p>
-              </div>
+          <div class="card">
+            <div class="head">Window</div>
+            <div class="content">
+              This is a neobrutalist-style window with a button and space for any content
+              you want!
+              <br />
+              <button class="button">Button</button>
             </div>
           </div>
         </div>
