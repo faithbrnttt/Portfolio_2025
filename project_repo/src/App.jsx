@@ -1,16 +1,11 @@
-import './App.css';
-import { useState } from 'react';
-import ProjectForm from './components/ProjectForm';
 
-function App() {
-  // const [mode, setMode] = useState('add');
+import ProjectsManager from "./pages/ProjectsManager.jsx"; // <-- FIXED
+import "./App.css";
 
+export default function App() {
   return (
     <>
-      <h1>Project Management</h1>
-      <ProjectForm/>
+      <ProjectsManager/>
     </>
   );
 }
-
-export default App;

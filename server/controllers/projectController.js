@@ -1,4 +1,13 @@
+// controllers/projectController.js
 const Project = require('../models/Project');
+
+const toTechArray = (val) => {
+  if (val == null) return [];
+  if (Array.isArray(val)) return val.map(t => t.trim()).filter(Boolean);
+  return String(val).split(',').map(t => t.trim()).filter(Boolean);
+};
+const pick = (obj, keys) =>
+  keys.reduce((acc, k) => (obj[k] !== undefined ? (acc[k] = obj[k], acc) : acc), {});
 
 const getProjects = async (req, res) => {
   try {
@@ -10,13 +19,29 @@ const getProjects = async (req, res) => {
 };
 
 // Create project with image upload
+// controllers/projectController.js (snippet)
 const createProject = async (req, res) => {
   try {
-    const imageUrl = req.file?.location || ''; // S3 URL
+    const file = req.file; // from multer-s3
+    const image = file
+      ? {
+        url: file.location,
+        key: file.key,
+        bucket: file.bucket,
+        etag: file.etag,
+        mimetype: file.mimetype,
+        size: file.size,
+      }
+      : undefined;
+
     const project = new Project({
-      ...req.body,
-      imageUrl,
+      title: req.body.title,
+      description: req.body.description,
+      codeUrl: req.body.codeUrl || req.body.repoUrl,  // support either name
+      technologies: req.body.technologies,            // CSV handled by model setter
+      image,
     });
+
     const saved = await project.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -24,21 +49,32 @@ const createProject = async (req, res) => {
   }
 };
 
+
 // Update project and optionally replace image
 const updateProject = async (req, res) => {
   try {
-    const imageUrl = req.file?.location;
-    const updateData = { ...req.body };
-    if (imageUrl) updateData.imageUrl = imageUrl;
+    const updateData = pick(req.body, ['title', 'description', 'appUrl']);
+    if (req.body.codeUrl || req.body.repoUrl) {
+      updateData.codeUrl = req.body.codeUrl || req.body.repoUrl;
+    }
+    if (req.body.technologies !== undefined) {
+      updateData.technologies = toTechArray(req.body.technologies);
+    }
+    if (req.file?.location) {
+      updateData.imageUrl = req.file.location;
+    }
 
-    const updated = await Project.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    const updated = await Project.findByIdAndUpdate(req.params.id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+    if (!updated) return res.status(404).json({ message: 'Not found' });
     res.status(200).json(updated);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// controllers/projectController.js
 const deleteProject = async (req, res) => {
   try {
     await Project.findByIdAndDelete(req.params.id);
@@ -48,10 +84,4 @@ const deleteProject = async (req, res) => {
   }
 };
 
-module.exports = {
-  getProjects,
-  createProject,
-  updateProject,
-  deleteProject 
-};
-
+module.exports = { getProjects, createProject, updateProject, deleteProject };
