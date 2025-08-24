@@ -10,7 +10,7 @@ const s3 = new S3Client({ region: process.env.AWS_REGION });
 const upload = multer({
   storage: multerS3({
     s3,
-    bucket: process.env.S3_BUCKET,
+    bucket: process.env.AWS_BUCKET,
     acl: "public-read",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: (_req, file, cb) => cb(null, `projects/${Date.now()}-${file.originalname}`),

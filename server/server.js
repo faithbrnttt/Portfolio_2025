@@ -13,7 +13,7 @@ const app = express();
 
 // If you do NOT need cookies, set credentials:false and a specific origin.
 app.use(cors({
-  origin: 'http://localhost:3600',  // your frontend origin (no path)
+  origin: ['http://localhost:3600', 'http://localhost:3700'], // your frontend origin (no path)
   credentials: false,               // set to true only if you send cookies
   methods: ['GET','POST','PUT','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization']
@@ -30,5 +30,5 @@ app.use('/api/projects', projectRoutes);
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server Running on http://localhost:${PORT}`));

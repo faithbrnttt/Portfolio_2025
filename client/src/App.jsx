@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Nav from './components/Nav'
 import projects from './assets/projects.png'
+
+import ProjectCards from './components/ProjectCards'
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -117,109 +120,8 @@ function App() {
       </div>
       <div className="body-container">
 
-        <div className="item11">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item12">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item13">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item14">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item15">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item16">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item17">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item18">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-        <div className="item19">
-          <div class="card">
-            <div class="head">Window</div>
-            <div class="content">
-              This is a neobrutalist-style window with a button and space for any content
-              you want!
-              <br />
-              <button class="button">Button</button>
-            </div>
-          </div>
-        </div>
-
-
+        <ProjectCards />
       </div>
-      <div className="item20"></div>
     </>
   )
 }
