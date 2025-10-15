@@ -3,14 +3,16 @@ import logo from './assets/logo.png'
 import ransom from './assets/ransom.png'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+
 import Nav from './components/Nav'
-import projects from './assets/projects.png'
+
 
 import ProjectCards from './components/ProjectCards'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+
 
   return (
     <>
@@ -20,19 +22,30 @@ function App() {
           <div className="item2">
             <button
               className="hamburger"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
             >
               <FontAwesomeIcon icon={faBars} />
             </button>
-            <div className={`nav-content ${menuOpen ? 'open' : ''}`}>
+
+            {/* Drawer */}
+            <div className={`nav-content ${menuOpen ? 'open' : ''}`} role="dialog" aria-modal="true">
+              <button
+                className="close"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+
               <Nav closeMenu={() => setMenuOpen(false)} />
             </div>
           </div>
 
+
         </div>
       </div>
-      <div class="container">
+      <div className="container">
 
         <div className="item3">
           <img className="ransom" src={ransom}></img>
@@ -116,7 +129,14 @@ function App() {
         <div className="item10"></div>
       </div>
       <div className="project-title">
-        <img src={projects}></img>
+        <div className="p">P</div>
+        <div className="r">R</div>
+        <div className="o">O</div>
+        <div className="j">J</div>
+        <div className="e">E</div>
+        <div className="c">C</div>
+        <div className="t">T</div>
+        <div className="s">S</div>
       </div>
       <div className="body-container">
 

@@ -53,6 +53,11 @@ const projectSchema = new mongoose.Schema(
   }
 );
 
+projectSchema.virtual('imageUrl').get(function () {
+  return this.image?.url || '';
+});
+
+
 // Optional: quick search helpers
 projectSchema.index({ title: 'text', description: 'text' });
 

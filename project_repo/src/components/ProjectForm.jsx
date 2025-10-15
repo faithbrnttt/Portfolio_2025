@@ -1,155 +1,161 @@
 // src/components/ProjectForm.jsx
 import { useEffect, useRef, useState } from "react";
 
-export default function ProjectForm({
-    project = null,           // pass a project to edit; null for create
-    onSuccess = () => { },     // called after successful create/update
-    onCancel = () => { },      // called when cancel edit
-}) {
-    const formRef = useRef(null);
+const API = import.meta.env?.VITE_API_URL || "http://localhost:3500";
+
+export default function ProjectForm({ project = null, onSuccess = () => { }, onCancel = () => { } }) {
+    const isEdit = !!(project && (project._id || project.id));
+    const getId = (p) => p?.id || p?._id;
+
+    const formEl = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const [form, setForm] = useState({
         title: "",
         description: "",
-        repoUrl: "",
         technologies: "",
-        image: null,
+        codeUrl: "",
+        appUrl: "",
+        imageFile: null,
+        removeImage: false,
     });
 
-    // Populate for edit; clear for create
+    // Seed values when editing
     useEffect(() => {
-        if (project) {
-            setForm({
-                title: project.title || "",
-                description: project.description || "",
-                repoUrl: project.codeUrl || "",
-                technologies: Array.isArray(project.technologies)
-                    ? project.technologies.join(", ")
-                    : (project.technologies || ""),
-                image: null,
-            });
-        } else {
+        if (!project) {
             setForm({
                 title: "",
                 description: "",
-                repoUrl: "",
                 technologies: "",
-                image: null,
+                codeUrl: "",
+                appUrl: "",
+                imageFile: null,
+                removeImage: false,
             });
-            formRef.current?.reset();
+            return;
         }
+        setForm((f) => ({
+            ...f,
+            title: project.title || "",
+            description: project.description || "",
+            technologies: Array.isArray(project.technologies)
+                ? project.technologies.join(", ")
+                : (project.technologies || ""),
+            codeUrl: project.codeUrl || "",
+            appUrl: project.appUrl || "",
+            imageFile: null,
+            removeImage: false,
+        }));
     }, [project]);
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        setForm((prev) => ({ ...prev, [name]: files ? files[0] : value }));
+    const onChange = (e) => {
+        const { name, value, type, checked, files } = e.target;
+        if (type === "file") {
+            setForm((f) => ({ ...f, imageFile: files?.[0] || null }));
+        } else if (type === "checkbox") {
+            setForm((f) => ({ ...f, [name]: checked }));
+        } else {
+            setForm((f) => ({ ...f, [name]: value }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const formEl = formRef.current;
-
-        const data = new FormData();
-        data.append("title", form.title);
-        data.append("description", form.description);
-        data.append("codeUrl", form.repoUrl);
-        if (form.technologies.trim()) data.append("technologies", form.technologies);
-        if (form.image) data.append("image", form.image);
+        setError("");
 
         try {
-            const url = project
-                ? `http://localhost:3500/api/projects/${project.id || project._id}`
-                : `http://localhost:3500/api/projects`;
-            const method = project ? "PUT" : "POST";
+            // Build FormData to support optional image
+            const fd = new FormData();
+            fd.append("title", form.title.trim());
+            fd.append("description", form.description.trim());
+            fd.append("technologies", form.technologies); // server can split by comma
+            fd.append("codeUrl", form.codeUrl.trim());
+            fd.append("appUrl", form.appUrl.trim());
+            fd.append("removeImage", String(form.removeImage));
+            if (form.imageFile) fd.append("image", form.imageFile);
 
-            const res = await fetch(url, { method, body: data });
-            if (!res.ok) throw new Error("Request failed");
-            await res.json();
+            // 🔑 Decide endpoint + method based on isEdit
+            const id = getId(project);
+            const url = isEdit ? `${API}/api/projects/${id}` : `${API}/api/projects`;
+            const method = isEdit ? "PUT" : "POST";
 
-            // reset form & notify parent
-            setForm({ title: "", description: "", repoUrl: "", technologies: "", image: null });
-            formEl?.reset();
+            const res = await fetch(url, {
+                method,
+                body: fd, // IMPORTANT: no manual Content-Type, let browser add boundary
+            });
+
+            if (!res.ok) {
+                const msg = await res.text().catch(() => "");
+                throw new Error(`Failed to ${isEdit ? "update" : "create"} project (${res.status}) ${msg}`);
+            }
+
+            // success
             onSuccess();
+            if (!isEdit && formEl.current) formEl.current.reset();
         } catch (err) {
-            console.error(err);
-            alert(err.message);
+            setError(err.message || "Submit failed");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <form ref={formRef} onSubmit={handleSubmit}>
-            <label className="block" htmlFor="title">Title</label>
-            <input
-                id="title"
-                name="title"
-                type="text"
-                required
-                value={form.title}
-                onChange={handleChange}
-                
-            />
+        <form ref={formEl} onSubmit={handleSubmit}>
+            {error && <p className="error">{error}</p>}
 
-            <label className="block" htmlFor="description">Description</label>
-            <textarea
-                id="description"
-                name="description"
-                rows={4}
-                value={form.description}
-                onChange={handleChange}
-                
-            />
+            <label>
+                Title
+                <input name="title" value={form.title} onChange={onChange} required />
+            </label>
 
-            <label className="block" htmlFor="repoUrl">Repo URL</label>
-            <input
-                id="repoUrl"
-                name="repoUrl"
-                type="url"
-                value={form.repoUrl}
-                onChange={handleChange}
-                
-            />
+            <label>
+                Description
+                <textarea name="description" value={form.description} onChange={onChange} />
+            </label>
 
-            <label className="block" htmlFor="technologies">Technologies</label>
-            <input
-                id="technologies"
-                name="technologies"
-                type="text"
-                value={form.technologies}
-                onChange={handleChange}
-                placeholder="React, Node.js, MongoDB, AWS S3"
-                aria-describedby="tech-help"
-            />
-            
+            <label>
+                Technologies (comma separated)
+                <input name="technologies" value={form.technologies} onChange={onChange} />
+            </label>
 
-            {project?.image?.url ? (
-                <>
-                    <label>Current Image</label>
-                    <img src={project.image.url} alt="" width="180" />
-                </>
-            ) : null}
+            <label>
+                Code URL
+                <input name="codeUrl" value={form.codeUrl} onChange={onChange} />
+            </label>
 
-            <label className="block" htmlFor="image">Image {project ? "(leave blank to keep current)" : ""}</label>
-            <input
-                id="image"
-                name="image"
-                type="file"
-                accept="image/*"
-                onChange={handleChange}
-            />
+            <label>
+                App URL
+                <input name="appUrl" value={form.appUrl} onChange={onChange} />
+            </label>
 
-            <button className="s-btn" type="submit" disabled={loading}>
-                {loading ? (project ? "Updating..." : "Saving...") : (project ? "Update Project" : "Save Project")}
-            </button>
+            <label>
+                Image
+                <input type="file" name="image" accept="image/*" onChange={onChange} />
+            </label>
 
-            {project ? (
-                <button  className="s-btn" type="button" onClick={onCancel}>
+            {isEdit && (
+                <label className="inline">
+                    <input
+                        type="checkbox"
+                        name="removeImage"
+                        checked={form.removeImage}
+                        onChange={onChange}
+                    />
+                    Remove existing image
+                </label>
+            )}
+
+            <div className="actions">
+                <button type="submit" disabled={loading}>
+                    {loading ? "Saving..." : isEdit ? "Update Project" : "Create Project"}
+                </button>
+                <button type="button" onClick={onCancel} disabled={loading}>
                     Cancel
                 </button>
-            ) : null}
+            </div>
+            
         </form>
     );
 }

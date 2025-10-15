@@ -1,14 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(255, 255, 255);
+}
+
+html,
+body {
   overflow-x: hidden;
+}
+
+body {
+  background-color: #fff;
 }
 
 .logo {
   width: 150px;
   background-color: rgb(35, 35, 35);
+  margin-left: 80px;
 }
 
 .container {
@@ -20,11 +30,12 @@
 
 .nav-container {
   display: flex;
-
+  background-color: white;
+  width: 100%;
 }
 
 .item1 {
-  width: 860px;
+  width: 50%;
   height: 100px;
   border: 3px solid rgb(5, 5, 5);
   display: flex;
@@ -36,14 +47,15 @@
 }
 
 .item2 {
-  width: 500px;
+  width: 50%;
   border: 4px solid rgb(5, 5, 5);
   display: flex;
   padding-left: 1rem;
-  align-items: center;
+  justify-content: center;
 }
 
-.hamburger {
+.hamburger,
+.close {
   display: none;
   font-size: 1.5rem;
   background: none;
@@ -55,14 +67,22 @@
 
 .nav-content {
   display: flex;
+  /* layout when visible */
   align-items: center;
   gap: 1rem;
+  padding-inline: 1rem;
+
+}
+
+.nav-content.open {
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .nav-list {
   display: flex;
   list-style: none;
-  padding-inline: 3.5rem;
+
 
 }
 
@@ -73,15 +93,17 @@
   width: 100%;
   z-index: 1000;
 
+
 }
 
 .nav-list li {
   padding-block: 1rem;
+
 }
 
 .nav-list a {
 
-  margin-inline: 10px;
+  margin-inline: 30px;
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
@@ -91,7 +113,7 @@
 .nav-list a:hover {
   cursor: pointer;
   text-decoration: underline;
-  text-decoration-style:wavy;
+  text-decoration-style: wavy;
   text-decoration-color: rgb(48, 169, 230);
   text-underline-offset: 6px;
 
@@ -150,6 +172,7 @@
 .reject2 {
   padding-left: 4px;
 }
+
 .reject3 {
   padding-left: 10px;
   text-align: center;
@@ -162,6 +185,7 @@
   background: none;
   font-weight: bold;
 }
+
 .reject4 {
   padding-left: 4px;
 }
@@ -186,8 +210,8 @@
 
 .ransom {
   background: none;
-  height: 300px;
-  margin-left: 250px;
+  width: 80%;
+  margin-left: 200px;
 }
 
 .rejects {
@@ -196,12 +220,6 @@
   overflow-y: hidden;
   scrollbar-width: none;
   border: 3px solid rgb(4, 4, 4);
-}
-
-.body-container {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 4rem;
 }
 
 .divider {
@@ -234,20 +252,127 @@
   background-color: gray;
 }
 
-
+.body-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 4rem;
+}
 
 .card {
+  position: relative;
   font-family: Montserrat, sans-serif;
-  width: 330px;
-  height: 250px;
+  max-width: 360px;
+  height: 300px;
   translate: -6px -6px;
   border: 3px solid #000000;
   box-shadow: 12px 12px 0 #000000;
   overflow: hidden;
   transition: all 0.3s ease;
-  margin: 35px;
-  
+  margin: 20px;
 }
+
+/* Full-bleed image that respects aspect ratio */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+
+.card-spacing { display: contents; }
+
+/* 4-row grid: [title][desc][tech][buttons] */
+.card-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 12px;
+  color: #fff;
+  background: linear-gradient(to top, rgba(89, 140, 191, 0.9) 60%, rgba(42,42,42,0) 100%);
+  display: grid;
+  gap: 0.5rem;
+
+  /* Tune these to taste, but keep them the same for all cards */
+  --title-h: 1.75em;   /* ~2 lines of 16px text */
+  --desc-h:  3.5em;   /* ~4 lines of 13px text */
+  --tech-h:  1.25em;   /* ~2 wrapped rows of icons */
+
+  grid-template-rows: var(--title-h) var(--desc-h) var(--tech-h) auto;
+}
+
+
+
+.card-title,
+.card-desc {
+  margin: 0;
+  padding-block: .25rem;
+  padding-inline: 1rem;
+  background-color: orange;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+         /* hide overflow text */
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;    /* exactly 2 lines */
+  line-clamp: 2;            /* standard property for compatibility */
+}
+
+.card-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;    /* exactly 4 lines */
+  line-clamp: 2;            /* standard property for compatibility */
+}
+
+.t-icons {
+  width: 100%;
+}
+
+.tech-icons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0;
+
+  align-content: flex-start; /* pack to top of the fixed row */
+            /* hide extra wraps beyond the fixed height */
+  height: 100%;              /* fill the var(--tech-h) track */
+}
+
+/* Wrapper gets bg/padding; svg keeps a fixed visual size */
+.tech-icon {
+  --icon-size: 20px;    /* controls the actual icon glyph size */
+  --pad: 6px;           /* controls the background padding */
+  box-sizing: content-box;     /* avoids border-box shrinking the glyph */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  padding: var(--pad);
+  border-radius: 8px;          /* pill/rounded background */
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Normalize both Font Awesome and react-icons to the same size */
+.tech-icon svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  vertical-align: middle;
+  transition: transform 0.2s ease, color 0.2s ease, fill 0.2s ease;
+  color: #fff;      /* FA uses currentColor */
+  fill: currentColor; /* Simple Icons uses currentColor */
+}
+
+.tech-icon:hover svg {
+  transform: scale(1.1);
+  color: #30a9e6;
+}
+
 
 .head {
   font-family: Montserrat, sans-serif;
@@ -273,14 +398,17 @@
 }
 
 .project-title {
-  text-align: center;
-  height: 200px;
-  padding-block: 3rem;
-  overflow: hidden;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  padding-block: 2rem;
 }
 
 .button {
   padding: 5px 10px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
   margin-top: 10px;
   border: 3px solid #000000;
   box-shadow: 3px 3px 0 #000000;
@@ -288,12 +416,12 @@
   background: rgb(74, 175, 175);
   transition: all 0.3s ease;
   cursor: pointer;
-  width: 100px;
+  width: 80px;
 }
 
 .button:hover {
   translate: 1.5px 1.5px;
-  box-shadow: 1.5px 1.5px 0 #000000;
+  box-shadow: 0 0 0 #000000;
   background: rgb(141, 178, 220);
 }
 
@@ -302,18 +430,126 @@
   box-shadow: 0 0 0 #000000;
 }
 
+.p,
+.r,
+.o,
+.j,
+.e,
+.c,
+.t,
+.s {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin: 38px;
+}
 
-@media (max-width: 768px) {
+.p,
+.s {
+  border: 3.5px solid rgb(241, 159, 104);
+  box-shadow: 0 4px 0 0 rgb(241, 159, 104);
+  color: rgb(241, 159, 104);
+}
+
+.j,
+.r,
+.t {
+  border: 3.5px solid rgb(29, 29, 29);
+  box-shadow: 0 4px 0 0 rgb(51, 51, 51);
+  background-color: rgb(51, 51, 51);
+  color: white;
+}
+
+.o {
+  border: 3.5px solid rgb(106, 231, 191);
+  box-shadow: 0 4px 0 0 rgb(106, 231, 191);
+  background-color: rgb(79, 79, 79);
+  color: rgb(106, 231, 191);
+}
+
+.e {
+  border: 3.5px solid rgb(243, 189, 215);
+  box-shadow: 0 4px 0 0 rgb(243, 189, 215);
+  color: rgb(243, 189, 215);
+}
+
+.c {
+  border: 3.5px solid rgb(106, 169, 231);
+  box-shadow: 0 4px 0 0 rgb(106, 169, 231);
+  background-color: rgb(79, 79, 79);
+  color: rgb(106, 169, 231);
+}
+
+
+
+.p:hover,
+.r:hover,
+.o:hover,
+.j:hover,
+.e:hover,
+.c:hover,
+.t:hover,
+.s:hover {
+  cursor: pointer;
+  translate: 1.5px 1.5px;
+  box-shadow: 0 0 0 #000000;
+}
+
+
+
+
+@media (max-width: 1024px) {
   .nav-container-container {
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
-    padding: 1rem;
     border: 5px solid black;
   }
 
   .nav-container {
     width: 100%;
+  }
+
+  /* Drawer */
+  .nav-content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(80vw, 320px);
+    height: 100dvh;
+    transform: translateX(100%);
+    transition: transform 200ms ease;
+    background: #0b0b0c;
+    padding: 1rem;
+    z-index: 1000;
+
+    /* prevent the stray scrollbar while closed */
+    overflow: hidden;
+    /* <— key line */
+    visibility: hidden;
+    /* inherited from base */
+    pointer-events: none;
+    /* inherited from base */
+    flex-direction: column;
+    /* vertical links in drawer */
+    gap: 1rem;
+  }
+
+  .nav-content.open {
+    transform: translateX(0);
+    overflow: auto;
+    /* allow scrolling when open */
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: -6px 0 16px rgba(0, 0, 0, .35);
+
   }
 
   .item1 {
@@ -329,69 +565,36 @@
 
   .item2 .hamburger {
     display: block;
+    margin-right: 20px;
     color: black;
-
   }
 
   .item2 .hamburger:hover {
     scale: 1.1;
-    color: rgb(31, 169, 164);
+    color: rgb(32, 172, 167);
   }
 
 
-  .nav-content {
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-    background-color: white;
-    padding: 1rem;
-    position: absolute;
-    top: 95px;
-    right: -4px;
-    z-index: 1000;
-    width: 338px;
-    pointer-events: none;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
+  .item3 {
     justify-content: center;
-    gap: 1rem;
-  }
 
-  .nav-content.open {
-    opacity: 1;
-    transform: scaleY(1);
-    pointer-events: auto;
-    visibility: visible;
-    box-shadow: inset 0 5px 10px 0 #080808;
-  }
-
-
-  .ransom {
-    height: 120px;
-    margin-right: 160px;
-  }
-
-  .rejects {
-    padding-inline: .5rem;
   }
 
   .nav-list {
     flex-direction: column;
-    align-items: flex-start;
     padding: 0;
+    margin-top: 2rem;
   }
 
   .nav-list li {
-    padding: 0.5rem 0;
+    padding: .5rem 0;
   }
 
-  .body-container {
-    display: flex;
-    flex-direction: column;
-
+  /* If drawer background is dark, make links readable */
+  .nav-list a {
+    color: #fff;
   }
+
 
   .item11,
   .item12,
@@ -405,6 +608,7 @@
     display: flex;
     justify-content: center;
   }
+
   .item11 .card,
   .item12 .card,
   .item13 .card,
@@ -420,12 +624,67 @@
 
   }
 
-  .ransom {
-    margin: 20px;
-
-    padding-left: 60px;
-
-    scale: 1.2;
-    
+  .body-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
+
+  .ransom {
+    margin: 0;
+    width: 100%;
+    margin-left: 175px;
+
+  }
+
+  .nav-content .close {
+    display: none;
+    /* hidden by default while drawer is closed */
+  }
+
+  .nav-content.open .close {
+    display: block;
+    position: absolute;
+    top: 1.25rem;
+    right: .5rem;
+    font-size: 2rem;
+    padding: .25rem .5rem;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    z-index: 1001;
+    /* above drawer contents */
+    /* optional: larger tap target */
+    inline-size: 44px;
+    block-size: 44px;
+  }
+
+  .nav-content.open .close:hover {
+    scale: 1.1;
+    color: rgb(32, 172, 167);
+  }
+
+  .project-title {
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    padding-inline: 3rem
+  }
+
+  .p,
+  .r,
+  .o,
+  .j,
+  .e,
+  .c,
+  .t,
+  .s {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+  }
+
+  
 }
