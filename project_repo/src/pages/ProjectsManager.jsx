@@ -70,6 +70,15 @@ export default function ProjectsManager() {
 
         // comment out if you don't have the endpoint yet
         // await persistOrder(reordered);
+
+        // send real Mongo ids
+        const ids = reordered.map(p => p._id || p.id); // ok; virtual id is the same string
+        await fetch(`${API}/api/projects/reorder`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(ids),
+        });
+
     };
 
     return (
@@ -102,7 +111,7 @@ export default function ProjectsManager() {
                                         {...dropProvided.droppableProps}
                                         ref={dropProvided.innerRef}
                                     >
-                                        
+
                                         <tbody>
                                             {projects.map((p, index) => (
                                                 <Draggable

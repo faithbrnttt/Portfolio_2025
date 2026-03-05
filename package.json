@@ -15,7 +15,10 @@
   "license": "MIT",
   "dependencies": {
     "@dotenvx/dotenvx": "^1.45.2",
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.1",
+    "npm": "^11.11.0"
   },
   "devDependencies": {
     "open-cli": "^8.0.0",

@@ -37,7 +37,9 @@ const projectSchema = new mongoose.Schema(
 
     // Repository URL (map your frontend repoUrl -> codeUrl in controller)
     codeUrl: { type: String, trim: true, validate: urlValidator },
+    order: { type: Number, index: true, default: 0 },
   },
+  
   {
     timestamps: true,
     versionKey: false,

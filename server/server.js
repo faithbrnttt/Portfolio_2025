@@ -22,6 +22,8 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 
+app.use(express.json());
+
 // Optional health check to quickly test headers
 app.get('/health', (req, res) => res.json({ ok: true }));
 

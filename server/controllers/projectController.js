@@ -1,20 +1,27 @@
 // controllers/projectController.js (multer-s3 version)
+const mongoose = require('mongoose');
 const Project = require('../models/Project');
 
 const toTechArray = (val) => {
   if (val == null) return [];
   if (Array.isArray(val)) return val.map(t => t.trim()).filter(Boolean);
-  try { const arr = JSON.parse(val); if (Array.isArray(arr)) return arr.map(t => String(t).trim()).filter(Boolean); } catch { }
+  try { const arr = JSON.parse(val); if (Array.isArray(arr)) return arr.map(t => String(t).trim()).filter(Boolean); } catch {}
   return String(val).split(',').map(t => t.trim()).filter(Boolean);
 };
 
+// ✅ GET (sorted by saved order)
 const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find().sort({ createdAt: -1 });
-    res.status(200).json(projects);
-  } catch (err) { res.status(500).json({ message: err.message }); }
+    const items = await Project.find({})
+      .sort({ order: 1, createdAt: 1 })
+      .lean();
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
+// ✅ POST (append new project to end using max(order)+1)
 const createProject = async (req, res) => {
   try {
     const f = req.file;
@@ -27,18 +34,23 @@ const createProject = async (req, res) => {
       size: f.size,
     } : undefined;
 
+    const max = await Project.findOne({}, 'order').sort({ order: -1 }).lean();
+    const nextOrder = (max?.order ?? -1) + 1;
+
     const project = await Project.create({
       title: req.body.title,
       description: req.body.description,
       codeUrl: req.body.codeUrl || req.body.repoUrl,
       technologies: toTechArray(req.body.technologies),
       image,
+      order: nextOrder,
     });
 
     res.status(201).json(project);
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
 
+// ✅ PUT :id (update fields/image; order unchanged here)
 const updateProject = async (req, res) => {
   try {
     const updates = {};
@@ -58,18 +70,50 @@ const updateProject = async (req, res) => {
       };
     }
 
-    const updated = await Project.findByIdAndUpdate(req.params.id, { $set: updates }, { new: true, runValidators: true });
+    const updated = await Project.findByIdAndUpdate(
+      req.params.id,
+      { $set: updates },
+      { new: true, runValidators: true }
+    );
     if (!updated) return res.status(404).json({ message: 'Not found' });
     res.json(updated);
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
 
+// ✅ DELETE
 const deleteProject = async (req, res) => {
   try {
-    // (Optional) also delete from S3 here using stored image.key
     await Project.findByIdAndDelete(req.params.id);
     res.status(204).end();
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
 
-module.exports = { getProjects, createProject, updateProject, deleteProject };
+// ✅ NEW: bulk reorder (save order indexes from DnD)
+const reorderProjects = async (req, res) => {
+  try {
+    const ids = req.body; // ["665...", "666...", ...] in the new order
+    if (!Array.isArray(ids) || !ids.length) {
+      return res.status(400).json({ message: 'Invalid payload' });
+    }
+    if (!ids.every(mongoose.isValidObjectId)) {
+      return res.status(400).json({ message: 'Invalid id in payload' });
+    }
+
+    const ops = ids.map((id, idx) => ({
+      updateOne: { filter: { _id: id }, update: { $set: { order: idx } } }
+    }));
+    await Project.bulkWrite(ops, { ordered: false });
+
+    res.sendStatus(204);
+  } catch (err) {
+    res.status(500).json({ message: err.message || 'Failed to save order' });
+  }
+};
+
+module.exports = {
+  getProjects,
+  createProject,
+  updateProject,
+  deleteProject,
+  reorderProjects,
+};
