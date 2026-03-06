@@ -1,7 +1,7 @@
 // src/components/ProjectForm.jsx
 import { useEffect, useRef, useState } from "react";
 
-const API = import.meta.env?.VITE_API_URL || "http://localhost:3500";
+const API = import.meta.env?.VITE_API_URL || "/api";
 
 const INITIAL_FORM = {
     title: "",
@@ -73,7 +73,7 @@ export default function ProjectForm({ project = null, onSuccess = () => { }, onC
             if (form.imageFile) fd.append("image", form.imageFile);
 
             const id = getId(project);
-            const url = isEdit ? `${API}/api/projects/${id}` : `${API}/api/projects`;
+            const url = isEdit ? `${API}/projects/${id}` : `${API}/projects`;
             const method = isEdit ? "PUT" : "POST";
 
             const res = await fetch(url, { method, body: fd });

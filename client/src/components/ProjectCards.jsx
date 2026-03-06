@@ -8,7 +8,7 @@ import {
     faReact, faJs, faNodeJs, faHtml5, faCss3Alt, faPython, faAws
 } from "@fortawesome/free-brands-svg-icons";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:3500";
+const API = import.meta.env.VITE_API_URL || "/api";
 
 // Map of normalized tech name -> JSX icon
 const ICON_MAP = {
@@ -79,7 +79,7 @@ export default function ProjectsCards() {
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch(`${API}/api/projects`);
+                const res = await fetch(`${API}/projects`);
                 if (!res.ok) throw new Error(`Failed to load (${res.status})`);
                 const data = await res.json();
                 setProjects(Array.isArray(data) ? data : []);
