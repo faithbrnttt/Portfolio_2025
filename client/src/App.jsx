@@ -1,6 +1,5 @@
 import './App.css'
 import logo from './assets/logo.png'
-import ransom from './assets/ransom.png'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -48,7 +47,7 @@ function App() {
       <div className="container">
 
         <div className="item3">
-          <img className="ransom" src={ransom}></img>
+          <h1>Full-Stack Developer • Data Engineer • Integration Engineer</h1>
         </div>
         <div className="item4">
 
