@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SiMongodb, SiAmazons3 } from "react-icons/si";
-
+import { playSound } from "../App";
 // Font Awesome brands (add faAws)
 import {
     faReact, faJs, faNodeJs, faHtml5, faCss3Alt, faPython, faAws
@@ -63,6 +63,14 @@ function TechIcons({ techs }) {
     return <div className="tech-icons">{items}</div>;
 }
 
+const handleRepo = (url) => {
+    playSound();
+    setTimeout(() => {
+        window.open(url, "_blank");
+
+    }, 500);
+};
+
 export default function ProjectsCards() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -92,7 +100,7 @@ export default function ProjectsCards() {
             {projects.map((p, index) => {
                 const id = p._id || p.id || p.slug || index;
                 const img = (p?.image?.url || p?.imageUrl || "").replace(/ /g, "%20");
-
+                
                 return (
                     <div className="card" key={id}>
                         <img
@@ -112,7 +120,7 @@ export default function ProjectsCards() {
                                 </div>
 
                                 {p.codeUrl ? (
-                                    <a className="button" href={p.codeUrl} target="_blank" rel="noreferrer">
+                                    <a className="button" onClick={() => handleRepo(p.codeUrl)} rel="noreferrer">
                                         Repo
                                     </a>
                                 ) : (

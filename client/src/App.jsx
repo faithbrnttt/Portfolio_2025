@@ -3,11 +3,16 @@ import logo from './assets/logo.png'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
-
 import Nav from './components/Nav'
-
+import singleKey from './assets/single-key.mp3'
 
 import ProjectCards from './components/ProjectCards'
+
+export function playSound() {
+  const audio = new Audio(singleKey);
+  audio.currentTime = 0;
+  audio.play();
+}
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,14 +74,14 @@ function App() {
         <div className="item10"></div>
       </div>
       <div className="project-title">
-        <div className="p">P</div>
-        <div className="r">R</div>
-        <div className="o">O</div>
-        <div className="j">J</div>
-        <div className="e">E</div>
-        <div className="c">C</div>
-        <div className="t">T</div>
-        <div className="s">S</div>
+        <div onClick={playSound} className="p">P</div>
+        <div onClick={playSound} className="r">R</div>
+        <div onClick={playSound} className="o">O</div>
+        <div onClick={playSound} className="j">J</div>
+        <div onClick={playSound} className="e">E</div>
+        <div onClick={playSound} className="c">C</div>
+        <div onClick={playSound} className="t">T</div>
+        <div onClick={playSound} className="s">S</div>
       </div>
       <div className="body-container">
 
