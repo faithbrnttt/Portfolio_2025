@@ -73,7 +73,7 @@ function App() {
         <div className="item9"></div>
         <div className="item10"></div>
       </div>
-      <div className="project-title">
+      <div id="projects" className="project-title">
         <div onClick={playSound} className="p">P</div>
         <div onClick={playSound} className="r">R</div>
         <div onClick={playSound} className="o">O</div>

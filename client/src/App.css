@@ -233,7 +233,7 @@ body {
   inset: auto 0 0 0;
   padding: 12px;
   color: #fff;
-  background: linear-gradient(to top, rgba(89, 140, 191, 0.9) 60%, rgba(42,42,42,0) 100%);
+  background: linear-gradient(to top, rgba(89, 140, 191, .9) 70%, rgba(42,42,42,0) 100%);
   display: grid;
   gap: 0.5rem;
 
@@ -253,10 +253,6 @@ body {
   padding-block: .25rem;
   padding-inline: 1rem;
   background-color: orange;
-
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-         /* hide overflow text */
 }
 
 .card-title {
@@ -268,10 +264,14 @@ body {
 }
 
 .card-desc {
-  font-size: 13px;
-  line-height: 1.4;
-  -webkit-line-clamp: 2;    /* exactly 4 lines */
-  line-clamp: 2;            /* standard property for compatibility */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: clip;
+  line-height: 1.28;
+  font-size: 16px;         /* standard property for compatibility */
 }
 
 .t-icons {
