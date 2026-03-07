@@ -88,6 +88,18 @@ form {
     width: 100px;
 }
 
+.logout {
+    padding: 0.4rem 0.8rem;
+    float: right;
+    margin: 10px;
+    color: rgb(26, 11, 83);
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgb(100, 182, 214);
+    border: 3px solid rgb(3, 48, 71);
+    font-weight: bold;
+}
+
 .r-btn,
 .create-update,
 .cancel {
@@ -104,7 +116,8 @@ form {
 .p-btn:hover,
 .r-btn:hover,
 .create-update:hover,
-.cancel:hover  {
+.cancel:hover,
+.logout:hover  {
     box-shadow: none;
     background-color: rgb(194, 179, 237);
 }

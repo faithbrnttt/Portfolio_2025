@@ -3,16 +3,40 @@ import { useEffect, useState, useRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import ProjectForm from "../components/ProjectForm";
 
-const API = import.meta.env?.VITE_API_URL;
+const API = import.meta.env?.VITE_API_URL || "";
 
 export default function ProjectsManager() {
+    const [tokenInput, setTokenInput] = useState("");
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        !!localStorage.getItem("admin_token")
+    );
+
     const [projects, setProjects] = useState([]);
     const [editing, setEditing] = useState(null);
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState("");
-    const savingOrderRef = useRef(false); // prevent rapid double-saves
+    const savingOrderRef = useRef(false);
 
     const idOf = (p) => p.id || p._id;
+
+    const getAuthHeaders = () => {
+        const token = localStorage.getItem("admin_token") || "";
+        return token ? { Authorization: `Bearer ${token}` } : {};
+    };
+
+    const handleLogin = () => {
+        if (!tokenInput.trim()) return;
+        localStorage.setItem("admin_token", tokenInput.trim());
+        setIsAuthenticated(true);
+        setTokenInput("");
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("admin_token");
+        setIsAuthenticated(false);
+        setProjects([]);
+        setEditing(null);
+    };
 
     const load = async () => {
         setLoading(true);
@@ -28,13 +52,27 @@ export default function ProjectsManager() {
         }
     };
 
-    useEffect(() => { load(); }, []);
+    useEffect(() => {
+        if (isAuthenticated) {
+            load();
+        }
+    }, [isAuthenticated]);
 
     const handleDelete = async (p) => {
         if (!confirm(`Delete "${p.title}"?`)) return;
+
         try {
-            const res = await fetch(`${API}/api/projects/${idOf(p)}`, { method: "DELETE" });
-            if (!res.ok && res.status !== 204) throw new Error(`Failed to delete (${res.status})`);
+            const res = await fetch(`${API}/api/projects/${idOf(p)}`, {
+                method: "DELETE",
+                headers: {
+                    ...getAuthHeaders(),
+                },
+            });
+
+            if (!res.ok && res.status !== 204) {
+                throw new Error(`Failed to delete (${res.status})`);
+            }
+
             if (editing && idOf(editing) === idOf(p)) setEditing(null);
             await load();
         } catch (e) {
@@ -42,24 +80,31 @@ export default function ProjectsManager() {
         }
     };
 
-    // (optional) persist order to backend
     const persistOrder = async (ordered) => {
         if (savingOrderRef.current) return;
         savingOrderRef.current = true;
+
         try {
-            await fetch(`${API}/api/projects/reorder`, {
+            const res = await fetch(`${API}/api/projects/reorder`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(ordered.map((p) => idOf(p))), // send array of ids
+                headers: {
+                    "Content-Type": "application/json",
+                    ...getAuthHeaders(),
+                },
+                body: JSON.stringify(ordered.map((p) => idOf(p))),
             });
-        } catch {
-            // non-fatal; you could toast an error here
+
+            if (!res.ok) {
+                throw new Error(`Failed to reorder (${res.status})`);
+            }
+        } catch (e) {
+            console.error(e);
+            alert(e.message || "Failed to save order");
         } finally {
             savingOrderRef.current = false;
         }
     };
 
-    // DnD
     const handleDragEnd = async (result) => {
         if (!result.destination) return;
 
@@ -68,22 +113,36 @@ export default function ProjectsManager() {
         reordered.splice(result.destination.index, 0, moved);
         setProjects(reordered);
 
-        // comment out if you don't have the endpoint yet
-        // await persistOrder(reordered);
-
-        // send real Mongo ids
-        const ids = reordered.map(p => p._id || p.id); // ok; virtual id is the same string
-        await fetch(`${API}/api/projects/reorder`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(ids),
-        });
-
+        await persistOrder(reordered);
     };
+
+    if (!isAuthenticated) {
+        return (
+            <div style={{ padding: "3rem", maxWidth: "400px", margin: "auto" }}>
+                <h2>Admin Login</h2>
+                <input
+                    type="password"
+                    placeholder="Enter admin token"
+                    value={tokenInput}
+                    onChange={(e) => setTokenInput(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") handleLogin();
+                    }}
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginBottom: "10px",
+                    }}
+                />
+                <button onClick={handleLogin}>Login</button>
+            </div>
+        );
+    }
 
     return (
         <>
             <h1>Project Manager</h1>
+            <button className="logout" onClick={handleLogout}>Logout</button>
 
             <div className="content-container">
                 <div className="form-container">
@@ -91,7 +150,10 @@ export default function ProjectsManager() {
                     <ProjectForm
                         key={editing?._id || editing?.id || "new"}
                         project={editing}
-                        onSuccess={() => { setEditing(null); load(); }}
+                        onSuccess={() => {
+                            setEditing(null);
+                            load();
+                        }}
                         onCancel={() => setEditing(null)}
                     />
                 </div>
@@ -111,7 +173,6 @@ export default function ProjectsManager() {
                                         {...dropProvided.droppableProps}
                                         ref={dropProvided.innerRef}
                                     >
-
                                         <tbody>
                                             {projects.map((p, index) => (
                                                 <Draggable
@@ -125,13 +186,22 @@ export default function ProjectsManager() {
                                                             {...dragProvided.draggableProps}
                                                             className={`draggable-row ${snapshot.isDragging ? "dragging" : ""}`}
                                                         >
-                                                            {/* drag handle cell (so buttons keep working) */}
-                                                            <td className="drag-handle-cell" {...dragProvided.dragHandleProps} title="Drag to reorder">
+                                                            <td
+                                                                className="drag-handle-cell"
+                                                                {...dragProvided.dragHandleProps}
+                                                                title="Drag to reorder"
+                                                            >
                                                                 ☰
                                                             </td>
-                                                            <td className="title-cell" title={p.title}>{p.title}</td>
-                                                            <td><button onClick={() => setEditing(p)}>Edit</button></td>
-                                                            <td><button onClick={() => handleDelete(p)}>Delete</button></td>
+                                                            <td className="title-cell" title={p.title}>
+                                                                {p.title}
+                                                            </td>
+                                                            <td>
+                                                                <button onClick={() => setEditing(p)}>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button onClick={() => handleDelete(p)}>Delete</button>
+                                                            </td>
                                                         </tr>
                                                     )}
                                                 </Draggable>
