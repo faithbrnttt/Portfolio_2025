@@ -212,9 +212,8 @@ body {
 
 .body-container {
   display: flex;
-  flex-wrap: wrap;
   padding-inline: 8rem;
-  padding-bottom: 3rem;
+  padding-block: 2rem;
 }
 
 .card {
@@ -356,9 +355,9 @@ body {
 
 .project-title {
   display: flex;
-  height: 300px;
   justify-content: center;
-  padding-block: 2rem;
+  border: 3px solid black;
+  align-items: center;
 }
 
 .button {
@@ -462,30 +461,10 @@ body {
 
 .contact-section {
   min-width: 100%;
+  padding-block: 2rem;
 }
 
-.contact-head {
-  border: 3px solid #000;
-  box-shadow: 12px 12px 0 #000;
-  background: #fbd0d7;
-  margin-bottom: 2rem;
-}
 
-.contact-head-bar {
-  font-family: Montserrat, sans-serif;
-  font-size: 14px;
-  font-weight: 900;
-  width: 100%;
-  height: 32px;
-  background-color: gray;
-  padding: 5px 12px;
-  color: #000;
-  border-bottom: 3px solid #000;
-}
-
-.contact-head-body {
-  padding: 1.5rem;
-}
 
 .contact-title {
   font-family: "Roboto", sans-serif;
@@ -508,7 +487,7 @@ body {
   justify-content: space-between;
   background-color: #8db2dc;
   padding-inline: 3.4rem;
-  padding-block: 2rem;
+  gap: 50px;
 }
 
 .contact-card {
@@ -578,8 +557,23 @@ body {
 }
 
 .contact-submit-btn {
-  width: auto;
-  min-width: 140px;
+  width: 100%;
+  height: 50px;
+  text-decoration: none;
+  color: #000;
+  background: #fbd0d7;
+  box-shadow: 4px 4px 0 #000;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border: 3px solid #000000;
+  box-shadow: 3px 3px 0 #000000;
+  font-weight: 750;
+  background: rgb(74, 175, 175);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 
 .form-status {
@@ -604,30 +598,32 @@ body {
 .contact-links {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  text-align: center;
-  padding: 2rem;
-  justify-content: center;
+  align-items: center;
+  gap: 20px;
   width: 50%;
 }
 .contact-link {
+  width:100px;
+  height: 100px;
   text-decoration: none;
   color: #000;
   background: #fbd0d7;
   box-shadow: 4px 4px 0 #000;
-  padding: 5px 10px;
   color: rgb(0, 0, 0);
   text-decoration: none;
-  text-align: center;
-  margin-top: 10px;
   border: 3px solid #000000;
   box-shadow: 3px 3px 0 #000000;
   font-weight: 750;
   background: rgb(74, 175, 175);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 
-.contact-link:hover {
+.contact-link:hover,
+.contact-submit-btn:hover {
   translate: 1.5px 1.5px;
   box-shadow: 0 0 0 #000000;
 }
@@ -644,13 +640,42 @@ body {
   background: #6ee8bf;
 }
 
-.contact-card-body {
-  padding: 1rem 1.25rem;
+.abstract {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  min-height: 110px;
-  justify-content: center;
+}
+
+hr {
+  border: 15px solid transparent;
+  width: 100%;
+  margin-block: 11.5px;
+  box-shadow: 1px 3px 3px 0 #000000;
+}
+
+.hrone,
+.hrsix {
+  background-color: orange;
+}
+
+.hrfour,
+.hreight {
+  background-color: #fbd0d7;
+}
+
+.hrthree,
+.hrseven {
+  background-color: #6ee8bf;
+}
+
+.hrtwo,
+.hrfive {
+  background-color: #808080;
+}
+
+.link-holder {
+  display: flex;
+  gap: 50px;
 }
 
 .contact-card-body span {

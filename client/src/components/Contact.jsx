@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 const CONTACT_ENDPOINT = `${API_BASE}/api/contact`;
@@ -117,18 +118,25 @@ export default function FaithbDevContactSection() {
                             </div>
                         )}
 
-                        <button type="submit" disabled={loading}>
-                            {loading ? "Sending..." : "Send Message"}
+                        <button className="contact-submit-btn" type="submit" disabled={loading}>
+                            <strong>{loading ? "Sending..." : "Send Message"}</strong>
                         </button>
 
                     </form>
                 </div>
 
                 <div className="contact-links">
-
-                    <a href="mailto:hello@faithb.dev" className="contact-link">
-                        <span>Email</span>
-                        <strong>hello@faithb.dev</strong>
+                    <div className="abstract">
+                        <hr className="hrone"></hr>
+                        <hr className="hrtwo"></hr>
+                        <hr className="hrthree"></hr>
+                        <hr className="hrfour"></hr>
+                    </div>
+                    <div className="link-holder">
+                        <a href="mailto:hello@faithb.dev" className="contact-link">
+                        <strong>Email</strong>
+                        <FontAwesomeIcon icon="envelope" />
+                        
                     </a>
 
                     <a
@@ -137,8 +145,8 @@ export default function FaithbDevContactSection() {
                         rel="noreferrer"
                         className="contact-link"
                     >
-                        <span>LinkedIn</span>
-                        <strong>faithbdev</strong>
+                        <strong>LinkedIn</strong>
+                        <FontAwesomeIcon icon={["fab", "linkedin"]} />
                     </a>
 
                     <a
@@ -147,8 +155,8 @@ export default function FaithbDevContactSection() {
                         rel="noreferrer"
                         className="contact-link"
                     >
-                        <span>GitHub</span>
-                        <strong>github.com/faithbrnttt</strong>
+                        <strong>GitHub</strong>
+                        <FontAwesomeIcon icon={["fab", "github"]} />
                     </a>
 
                     <a
@@ -157,10 +165,17 @@ export default function FaithbDevContactSection() {
                         rel="noreferrer"
                         className="contact-link"
                     >
-                        <span>Resume</span>
-                        <strong>View Resume</strong>
+                        <strong>Resume</strong>
+                        <FontAwesomeIcon icon="file-pdf" />
                     </a>
-
+                    </div>
+                    <div className="abstract">
+                        <hr className="hrfive"></hr>
+                        <hr className="hrsix"></hr>
+                        <hr className="hrseven"></hr>
+                        <hr className="hreight"></hr>
+                        
+                    </div>
                 </div>
 
             </div>

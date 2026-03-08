@@ -5,8 +5,8 @@ const Nav = ({closeMenu}) => {
         <div>
             <ul className="nav-list">
                 <li><a onClick={closeMenu} href={resume} target="_blank" rel="noopener noreferrer">Resume</a></li>
-                <li><a onClick={closeMenu} href="#projects">Projects</a></li>
-                <li><a onClick={closeMenu} href="#contact">Contact</a></li>
+                <li><a onClick={closeMenu} href="#prodivide">Projects</a></li>
+                <li><a onClick={closeMenu} href="#codivide">Contact</a></li>
             </ul>
         </div>
     )

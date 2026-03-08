@@ -1,8 +1,8 @@
 import './App.css'
 import logo from './assets/logo.png'
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import './fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Nav from './components/Nav'
 import singleKey from './assets/single-key.mp3'
 import Contact from "./components/Contact";
@@ -29,7 +29,7 @@ function App() {
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
             >
-              <FontAwesomeIcon icon={faBars} />
+              <FontAwesomeIcon icon="faBars" />
             </button>
 
             {/* Drawer */}
@@ -39,7 +39,7 @@ function App() {
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <FontAwesomeIcon icon={faXmark} />
+                <FontAwesomeIcon icon="faXmark" />
               </button>
 
               <Nav closeMenu={() => setMenuOpen(false)} />
@@ -68,29 +68,33 @@ function App() {
       </div>
       
       <div className="item8"></div>
-      <div className="divider">
+      <div id="prodivide" className="divider">
 
         <div className="item9"></div>
         <div className="item10"></div>
       </div>
-      <div id="projects" className="project-title">
-        <div onClick={playSound} className="p">P</div>
-        <div onClick={playSound} className="r">R</div>
-        <div onClick={playSound} className="o">O</div>
-        <div onClick={playSound} className="j">J</div>
-        <div onClick={playSound} className="e">E</div>
-        <div onClick={playSound} className="c">C</div>
-        <div onClick={playSound} className="t">T</div>
-        <div onClick={playSound} className="s">S</div>
+      
+      <div id="pcont" className="project-container">
+        <div id="projects" className="project-title">
+          <div onClick={playSound} className="p">P</div>
+          <div onClick={playSound} className="r">R</div>
+          <div onClick={playSound} className="o">O</div>
+          <div onClick={playSound} className="j">J</div>
+          <div onClick={playSound} className="e">E</div>
+          <div onClick={playSound} className="c">C</div>
+          <div onClick={playSound} className="t">T</div>
+          <div onClick={playSound} className="s">S</div>
+        </div>
+        <div className="body-container">
+          <ProjectCards />
+        </div>
       </div>
-      <div className="body-container">
-
-        <ProjectCards />
-      </div>
-      <div className="divider">
+      <div id="codivide" className="divider">
         <div className="item11"></div>
         <div className="item12"></div>
       </div>
+  
+
       <div className="contact-container">
         <Contact />
       </div>
