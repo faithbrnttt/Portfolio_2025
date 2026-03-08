@@ -10,12 +10,8 @@ body {
 }
 
 h1 {
-    display: flex;
-    justify-content: center;
-    padding-block: 3rem;
     background-color: rgb(24, 112, 184);
-    color: rgb(26, 11, 83);
-    font-size: 40px;
+    color: rgb(234, 217, 219);
 }
 
 
@@ -26,7 +22,7 @@ textarea,
     padding: .25rem;
     background-color: rgb(233, 230, 247);
     border-radius: 10px;
-    border: 3px solid rgb(63, 182, 241);
+    border: 3px solid rgb(26, 11, 83);
     width: 355px;
 }
 
@@ -53,13 +49,20 @@ form {
     min-width: 300px;
 }
 
+.banner {
+    background-color: rgb(42, 109, 186);
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1.5rem;
+    padding-inline: 3rem;
+}
+
 .block {
     align-self: start;
     text-decoration: underline;
     text-underline-offset: 5px;
     text-decoration-thickness: 2px;
     font-weight: bold;
-    font-size: 24px;
     color: rgb(26, 11, 83);
 }
 
@@ -74,7 +77,6 @@ form {
     cursor: pointer;
     color: rgb(26, 11, 83);
     font-weight: bold;
-    font-size: 24px;
     box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -85,19 +87,18 @@ form {
     background-color: rgb(100, 182, 214);
     border: 3px solid rgb(3, 48, 71);
     box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.2);
-    width: 100px;
 }
+
 
 .logout {
     padding: 0.4rem 0.8rem;
-    float: right;
-    margin: 10px;
-    color: rgb(26, 11, 83);
+    color: rgb(234, 217, 219);
     border-radius: 6px;
     cursor: pointer;
-    background-color: rgb(100, 182, 214);
+    background-color: rgb(3, 48, 71);
     border: 3px solid rgb(3, 48, 71);
     font-weight: bold;
+    
 }
 
 .r-btn,
@@ -107,7 +108,6 @@ form {
     width: 100%;
     border-radius: 10px;
     height: 50px;
-    font-size: 24px;
     font-weight: bold;
     color: rgb(26, 11, 83);
 }
@@ -122,6 +122,10 @@ form {
     background-color: rgb(194, 179, 237);
 }
 
+.logout:hover {
+    color: rgb(26, 11, 83);
+}
+
 .form-title {
     text-decoration: underline;
     text-decoration-style: wavy;
@@ -130,20 +134,25 @@ form {
     padding-block: .95rem;
 }
 
-.form-container,
 .list-container {
+    padding-inline: 3rem;
+}
+
+.form-container {
+    padding-inline: 3rem;
+}
+
+.list-container,
+.form-container {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    padding-inline: 3rem;
     padding-block: 2rem;
+    width: 50%;
 }
 
 .content-container {
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    
 }
 
 
@@ -155,22 +164,21 @@ form {
 
 #projects-table th,
 #projects-table td {
-    padding-right: 0.6rem;
-    padding-bottom: 0.6rem;
-    font-size: 24px;
     font-weight: bold;
     color: rgb(26, 11, 83);
+    padding-bottom: .5rem;
 }
 
 /* Optional: make buttons consistent */
 #projects-table button {
-    padding: 0.4rem 0.8rem;
     color: rgb(26, 11, 83);
     border-radius: 6px;
     cursor: pointer;
     background-color: rgb(100, 182, 214);
     border: 3px solid rgb(3, 48, 71);
     font-weight: bold;
+    width: 100px;
+    float: right;
 }
 
 #projects-table button:hover {
@@ -185,11 +193,16 @@ form {
 .create-update {
     margin-right: 10px;
 }
+
 .actions {
     display: flex;
     
 }
 
+.title-cell {
+    padding-left: .25rem;
+    padding-top: .2rem; 
+}
 
 @media (max-width: 1024px) {
     .content-container {

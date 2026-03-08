@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const projectRoutes = require('./routes/projectRoutes');
 const { errorHandler } = require('./middleware/errorHandler');
 const connectDB = require('./config/db');
-
+const contactRoutes = require("./routes/contactRoutes");
 connectDB();
 
 const app = express();
@@ -30,6 +30,7 @@ app.get('/health', (req, res) => res.json({ ok: true }));
 // Your API base path is /api/projects
 app.use('/api/projects', projectRoutes);
 
+app.use("/api", contactRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT;

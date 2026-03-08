@@ -20,4 +20,5 @@ router.put('/reorder', requireAdmin, ctrl.reorderProjects);
 router.put('/:id', requireAdmin, upload.single('image'), ctrl.updateProject);
 router.delete('/:id', requireAdmin, ctrl.deleteProject);
 
+
 module.exports = router;

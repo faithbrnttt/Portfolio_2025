@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import Nav from './components/Nav'
 import singleKey from './assets/single-key.mp3'
-
+import Contact from "./components/Contact";
 import ProjectCards from './components/ProjectCards'
 
 export function playSound() {
@@ -22,7 +22,7 @@ function App() {
     <>
       <div className="nav-container-container">
         <div className="nav-container">
-          <div className="item1"><img className="logo" src={logo}></img></div>
+          <div className="item1"><a href="/"><img className="logo" src={logo}></img></a></div>
           <div className="item2">
             <button
               className="hamburger"
@@ -86,6 +86,13 @@ function App() {
       <div className="body-container">
 
         <ProjectCards />
+      </div>
+      <div className="divider">
+        <div className="item11"></div>
+        <div className="item12"></div>
+      </div>
+      <div className="contact-container">
+        <Contact />
       </div>
     </>
   )

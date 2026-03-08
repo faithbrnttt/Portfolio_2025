@@ -141,8 +141,10 @@ export default function ProjectsManager() {
 
     return (
         <>
-            <h1>Project Manager</h1>
-            <button className="logout" onClick={handleLogout}>Logout</button>
+            <div className="banner">
+                <h1>Project Manager</h1>
+                <button className="logout" onClick={handleLogout}>Logout</button>
+            </div>
 
             <div className="content-container">
                 <div className="form-container">
