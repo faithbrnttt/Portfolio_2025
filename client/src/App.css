@@ -484,10 +484,9 @@ body {
 
 .contact-container {
   display: flex;
-  justify-content: space-between;
   background-color: #8db2dc;
-  padding-inline: 3.4rem;
-  gap: 50px;
+  justify-content: space-around;
+  padding-inline: 2rem;
 }
 
 .contact-card {
@@ -495,10 +494,6 @@ body {
   box-shadow: 12px 12px 0 #000;
   background: #8db2dc;
   overflow: hidden;
-}
-
-.contact-form-card {
-  width: 50%;
 }
 
 .contact-card-head {
@@ -600,7 +595,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: 50%;
+  padding-inline: 2.5rem;
+  
 }
 .contact-link {
   width:100px;
@@ -649,7 +645,7 @@ body {
 hr {
   border: 15px solid transparent;
   width: 100%;
-  margin-block: 11.5px;
+  margin-block: 11.2px;
   box-shadow: 1px 3px 3px 0 #000000;
 }
 
@@ -675,7 +671,7 @@ hr {
 
 .link-holder {
   display: flex;
-  gap: 50px;
+  gap: 25px;
 }
 
 .contact-card-body span {
