@@ -52,7 +52,7 @@ function App() {
       <div className="container">
 
         <div className="item3">
-          <h1>Full-Stack Developer • Data Engineer • Integration Engineer</h1>
+          <h1 className="show">Full-Stack Developer • Data Engineer • Integration Engineer</h1>
         </div>
         <div className="item4">
 
