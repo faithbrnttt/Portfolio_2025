@@ -141,7 +141,7 @@ export default function FaithbDevContactSection() {
                     </a>
 
                     <a
-                        href={resume}
+                        href="https://www.linkedin.com/in/faithbdev"
                         target="_blank"
                         rel="noreferrer"
                         className="contact-link"
@@ -161,7 +161,7 @@ export default function FaithbDevContactSection() {
                     </a>
 
                     <a
-                        href="/Faith_Burnett_Resume.pdf"
+                        href={resume}
                         target="_blank"
                         rel="noreferrer"
                         className="contact-link"
