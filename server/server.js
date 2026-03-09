@@ -11,12 +11,15 @@ connectDB();
 
 const app = express();
 
-// If you do NOT need cookies, set credentials:false and a specific origin.
 app.use(cors({
-  origin: ['http://localhost:3600', 'http://localhost:3700'], // your frontend origin (no path)
-  credentials: false,               // set to true only if you send cookies
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
+  origin: [
+    'http://localhost:3600',
+    'http://localhost:3700',
+    'https://faithb.dev'
+  ],
+  credentials: false,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
