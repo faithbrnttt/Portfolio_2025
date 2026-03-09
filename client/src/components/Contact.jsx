@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import resume from '../assets/Burnett_Baseline_Resume.pdf'
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 const CONTACT_ENDPOINT = `${API_BASE}/api/contact`;
@@ -140,7 +141,7 @@ export default function FaithbDevContactSection() {
                     </a>
 
                     <a
-                        href="https://www.linkedin.com/in/faithbdev"
+                        href={resume}
                         target="_blank"
                         rel="noreferrer"
                         className="contact-link"
