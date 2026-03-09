@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import resume from '../assets/Burnett_Baseline_Resume.pdf'
+import { faEnvelope, faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faLinkedin, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 const CONTACT_ENDPOINT = `${API_BASE}/api/contact`;
@@ -136,7 +138,7 @@ export default function FaithbDevContactSection() {
                     <div className="link-holder">
                         <a href="mailto:fabdev90@outlook.com" className="contact-link">
                         <strong>Email</strong>
-                        <FontAwesomeIcon icon="envelope" />
+                        <FontAwesomeIcon icon={faEnvelope} />
                         
                     </a>
 
@@ -147,7 +149,7 @@ export default function FaithbDevContactSection() {
                         className="contact-link"
                     >
                         <strong>LinkedIn</strong>
-                        <FontAwesomeIcon icon={["fab", "linkedin"]} />
+                        <FontAwesomeIcon icon={faLinkedin} />
                     </a>
 
                     <a
@@ -157,7 +159,7 @@ export default function FaithbDevContactSection() {
                         className="contact-link"
                     >
                         <strong>GitHub</strong>
-                        <FontAwesomeIcon icon={["fab", "github"]} />
+                        <FontAwesomeIcon icon={faGithub} />
                     </a>
 
                     <a
@@ -167,7 +169,7 @@ export default function FaithbDevContactSection() {
                         className="contact-link"
                     >
                         <strong>Resume</strong>
-                        <FontAwesomeIcon icon="file-pdf" />
+                        <FontAwesomeIcon icon={faFilePdf} />
                     </a>
                     </div>
                     <div className="abstract">
