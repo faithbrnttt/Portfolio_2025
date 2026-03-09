@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import resume from '../assets/Burnett_Baseline_Resume.pdf'
 import { faEnvelope, faFilePdf } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faLinkedin, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 const CONTACT_ENDPOINT = `${API_BASE}/api/contact`;
