@@ -133,7 +133,7 @@ export default function FaithbDevContactSection() {
                         <hr className="hrfour"></hr>
                     </div>
                     <div className="link-holder">
-                        <a href="mailto:hello@faithb.dev" className="contact-link">
+                        <a href="mailto:fabdev90@outlook.com" className="contact-link">
                         <strong>Email</strong>
                         <FontAwesomeIcon icon="envelope" />
                         
