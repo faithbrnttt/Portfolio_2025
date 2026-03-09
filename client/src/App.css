@@ -216,6 +216,10 @@ body {
   padding-block: 2rem;
 }
 
+.project-container {
+  height: 100vh;
+}
+
 .card {
   position: relative;
   font-family: Montserrat, sans-serif;

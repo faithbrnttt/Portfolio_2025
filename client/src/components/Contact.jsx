@@ -33,7 +33,7 @@ export default function FaithbDevContactSection() {
 
         try {
             setLoading(true);
-
+            
             const res = await fetch(CONTACT_ENDPOINT, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
