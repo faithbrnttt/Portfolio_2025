@@ -312,7 +312,7 @@ body {
   text-overflow: ellipsis;
   line-height: 1.28;
   font-size: 16px;
-  max-height: calc(1.28em * 2);
+  max-height: calc(2em * 2);
   padding-block: 1rem;
   background-color: orange;
 }
