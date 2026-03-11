@@ -927,7 +927,6 @@ hr {
   .t,
   .s {
     height: 40px;
-    margin: 5px;
     font-size: 24px;
   }
 
@@ -937,6 +936,7 @@ hr {
 
   .body-container {
     padding-inline: 2rem;
+    height: auto;
   }
 
   .card {
