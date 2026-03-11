@@ -20,7 +20,7 @@ body {
   height: auto;
   display: block;
   background-color: rgb(35, 35, 35);
-  margin-left: 2.75rem;
+  margin-left: 0;
 }
 
 .show {
@@ -39,34 +39,48 @@ body {
   padding-top: 4.75rem;
 }
 
+.nav-container-container {
+  display: flex;
+  position: fixed;
+  border: 3px solid rgb(5, 5, 5);
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+}
+
 .nav-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   position: relative;
 }
 
 .item1 {
-  width: 40%;
+  flex: 0 0 40%;
   min-height: 100px;
   border: 3px solid rgb(5, 5, 5);
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding-inline: clamp(1rem, 3vw, 2rem);
   box-shadow: inset 1px 1px 12px 5px #000000;
   background-color: rgb(35, 35, 35);
 }
 
 .item2 {
-  width: 60%;
-  height: 100px;
+  flex: 1 1 60%;
+  min-height: 100px;
   border: 4px solid rgb(5, 5, 5);
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding-inline: clamp(0.75rem, 2vw, 1.5rem);
   background: #fff;
+  position: relative;
+  min-width: 0;
 }
 
 .hamburger,
@@ -101,14 +115,6 @@ body {
   gap: clamp(0.75rem, 2vw, 2rem);
 }
 
-.nav-container-container {
-  display: flex;
-  position: fixed;
-  border: 3px solid rgb(5, 5, 5);
-  width: 100%;
-  z-index: 1000;
-}
-
 .nav-list li {
   padding-block: 0.5rem;
 }
@@ -128,7 +134,6 @@ body {
   text-decoration-style: wavy;
   text-decoration-color: rgb(48, 169, 230);
   text-underline-offset: 6px;
-
 }
 
 .item3 {
@@ -203,7 +208,6 @@ body {
   background-color: rgb(141, 178, 220);
 }
 
-
 .item10,
 .item11 {
   width: 20%;
@@ -229,10 +233,14 @@ body {
   gap: 2rem;
   padding-inline: clamp(1rem, 4vw, 8rem);
   padding-block: 2rem;
+  height: auto;
+  min-height: auto;
+  overflow: visible;
 }
 
 .project-container {
-  height: 100vh;
+  height: auto;
+  min-height: auto;
 }
 
 .card {
@@ -254,9 +262,9 @@ body {
   object-fit: fill;
 }
 
-
-.card-spacing { display: contents; }
-
+.card-spacing {
+  display: contents;
+}
 
 .card-overlay {
   position: absolute;
@@ -272,12 +280,10 @@ body {
   grid-template-rows: var(--title-h) var(--desc-h) var(--tech-h) auto;
 }
 
-
-
 .card-title,
 .card-desc {
   margin: 0;
-  padding-block: .25rem;
+  padding-block: 0.25rem;
   padding-inline: 1rem;
   background-color: orange;
 }
@@ -286,8 +292,8 @@ body {
   font-size: 16px;
   font-weight: 900;
   line-height: 1.4;
-  -webkit-line-clamp: 2;    /* exactly 2 lines */
-  line-clamp: 2;            /* standard property for compatibility */
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .card-desc {
@@ -298,7 +304,7 @@ body {
   overflow: hidden;
   text-overflow: clip;
   line-height: 1.28;
-  font-size: 16px;         /* standard property for compatibility */
+  font-size: 16px;
 }
 
 .t-icons {
@@ -310,42 +316,37 @@ body {
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-top: 0;
-
-  align-content: flex-start; /* pack to top of the fixed row */
-            /* hide extra wraps beyond the fixed height */
-  height: 100%;              /* fill the var(--tech-h) track */
+  align-content: flex-start;
+  height: 100%;
 }
 
-/* Wrapper gets bg/padding; svg keeps a fixed visual size */
 .tech-icon {
-  --icon-size: 20px;    /* controls the actual icon glyph size */
-  --pad: 6px;           /* controls the background padding */
-  box-sizing: content-box;     /* avoids border-box shrinking the glyph */
+  --icon-size: 20px;
+  --pad: 6px;
+  box-sizing: content-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: var(--icon-size);
   height: var(--icon-size);
   padding: var(--pad);
-  border-radius: 8px;          /* pill/rounded background */
+  border-radius: 8px;
   background: rgba(0, 0, 0, 0.35);
 }
 
-/* Normalize both Font Awesome and react-icons to the same size */
 .tech-icon svg {
   width: var(--icon-size);
   height: var(--icon-size);
   vertical-align: middle;
   transition: transform 0.2s ease, color 0.2s ease, fill 0.2s ease;
-  color: #fff;      /* FA uses currentColor */
-  fill: currentColor; /* Simple Icons uses currentColor */
+  color: #fff;
+  fill: currentColor;
 }
 
 .tech-icon:hover svg {
   transform: scale(1.1);
   color: #30a9e6;
 }
-
 
 .head {
   font-family: Montserrat, sans-serif;
@@ -375,6 +376,7 @@ body {
   justify-content: center;
   border: 3px solid black;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .button {
@@ -464,8 +466,6 @@ body {
   color: rgb(106, 169, 231);
 }
 
-
-
 .p:hover,
 .r:hover,
 .o:hover,
@@ -483,8 +483,6 @@ body {
   min-width: 100%;
   padding-block: 2rem;
 }
-
-
 
 .contact-title {
   font-family: "Roboto", sans-serif;
@@ -575,10 +573,6 @@ body {
   height: 50px;
   text-decoration: none;
   color: #000;
-  background: #fbd0d7;
-  box-shadow: 4px 4px 0 #000;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
   border: 3px solid #000000;
   box-shadow: 3px 3px 0 #000000;
   font-weight: 750;
@@ -615,17 +609,13 @@ body {
   align-items: center;
   gap: 20px;
   padding-inline: 2.5rem;
-  
 }
+
 .contact-link {
-  width:100px;
+  width: 100px;
   height: 100px;
   text-decoration: none;
   color: #000;
-  background: #fbd0d7;
-  box-shadow: 4px 4px 0 #000;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
   border: 3px solid #000000;
   box-shadow: 3px 3px 0 #000000;
   font-weight: 750;
@@ -688,14 +678,12 @@ hr {
   background-color: #808080;
 }
 
-
 .link-holder {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   width: 100%;
 }
-
 
 .contact-card-body span {
   font-size: 13px;
@@ -715,7 +703,6 @@ hr {
   display: none;
 }
 
-
 @media (max-width: 1024px) {
   .p,
   .r,
@@ -726,7 +713,7 @@ hr {
   .t,
   .s {
     height: 90px;
-    width:90px;
+    width: 90px;
     margin: 5px;
     font-size: 24px;
   }
@@ -755,22 +742,29 @@ hr {
   .contact-link {
     width: 100px;
     height: 100px;
-    margin-inline: 16px;
+    margin: 0;
     font-size: 16px;
   }
 }
 
 @media (max-width: 768px) {
   .body-container {
-    padding-inline: 5rem;
-    padding-block: 4rem;
-    min-height: 100vh;
+    padding-inline: 2rem;
+    padding-block: 3rem;
     height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .project-container {
+    height: auto;
+    min-height: auto;
   }
 
   .card {
     width: 100%;
-    height: 375px;
+    max-width: 420px;
+    height: auto;
     margin-bottom: 20px;
   }
 
@@ -823,6 +817,7 @@ hr {
     height: 65px;
     width: 65px;
     font-size: 24px;
+    margin: 8px;
   }
 
   .project-title {
@@ -836,37 +831,40 @@ hr {
   .nav-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-inline: 0.75rem;
+    align-items: stretch;
     width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   .item1,
   .item2 {
     display: flex;
     align-items: center;
-    height: 100px;
-    padding-inline: 0.75rem;
+    min-height: 100px;
+    margin: 0;
   }
 
   .item1 {
-    width: auto;
-    flex: 0 0 auto;
-    min-height: 80px;
+    flex: 0 0 40%;
     justify-content: flex-start;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    min-width: 0;
   }
 
   .item2 {
-    width: auto;
-    flex: 1 1 auto;
-    min-height: 80px;
+    flex: 1 1 60%;
     justify-content: flex-end;
     position: relative;
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+    min-width: 0;
   }
 
   .logo {
     width: 110px;
-    margin-left: 0;
+    margin: 0;
   }
 
   .hamburger {
@@ -886,8 +884,9 @@ hr {
   .nav-content {
     position: absolute;
     top: 100%;
+    left: 0;
     right: 0;
-    width: 100vw;
+    width: 100%;
     background: #ffffff;
     border: 9px solid #000;
     padding: 1rem;
@@ -907,6 +906,7 @@ hr {
     align-items: stretch;
     gap: 0.25rem;
     width: 100%;
+    padding-right: 0;
   }
 
   .nav-list li {
@@ -949,21 +949,29 @@ hr {
     height: 40px;
     width: 40px;
     font-size: 24px;
+    margin: 6px;
   }
 
   .project-title {
-    padding-inline: 1.5rem;
-    margin-bottom: 1.25rem;
+    padding-inline: 1rem;
+    padding-block: 1.5rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.2rem;
   }
 
   .body-container {
-    padding-inline: 2rem;
-    padding-block: 3rem;
-    min-height: 100vh;
+    padding-inline: 1rem;
+    padding-block: 2rem;
     height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .project-container {
+    height: auto;
+    min-height: auto;
   }
 
   .card {
@@ -1019,32 +1027,39 @@ hr {
   .nav-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-inline: 0.5rem;
+    align-items: stretch;
     width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   .item1,
   .item2 {
     display: flex;
     align-items: center;
-    height: 100px;
-    padding-inline: 0.5rem;
+    min-height: 100px;
+    margin: 0;
   }
 
   .item1 {
+    flex: 0 0 42%;
     justify-content: flex-start;
-    flex: 0 0 auto;
+    padding-left: 0.75rem;
+    padding-right: 0.35rem;
+    min-width: 0;
   }
 
   .item2 {
+    flex: 1 1 58%;
     justify-content: flex-end;
-    flex: 1 1 auto;
     position: relative;
+    padding-left: 0.35rem;
+    padding-right: 0.75rem;
+    min-width: 0;
   }
 
   .item3 {
-    padding-inline: 2rem;
+    padding-inline: 1rem;
   }
 
   .show {
@@ -1053,7 +1068,7 @@ hr {
 
   .logo {
     width: 95px;
-    margin-left: 0;
+    margin: 0;
   }
 
   .hamburger,
@@ -1064,8 +1079,9 @@ hr {
 
   .nav-content {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    left: 0;
     right: 0;
-    width: 100vw;
+    width: 100%;
     border: 3px solid black;
   }
 
