@@ -306,13 +306,14 @@ body {
 
 .card-desc {
   display: -webkit-box;
+  -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   line-clamp: 3;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: clip;
+  text-overflow: ellipsis;
   line-height: 1.28;
   font-size: 16px;
+  max-height: calc(1.28em * 3);
 }
 
 .t-icons {
