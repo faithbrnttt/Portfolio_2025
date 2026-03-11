@@ -36,7 +36,9 @@ body {
 .container {
   grid-template-columns: 1fr 1fr 1fr;
   border: 3px solid rgb(5, 5, 5);
-  padding-top: 4.75rem;
+  margin-top: 100px;                 /* pushes content below fixed nav */
+  min-height: calc(100vh - 100px);   /* first section fills remaining screen */
+  align-content: start;
 }
 
 .nav-container-container {
@@ -230,17 +232,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: flex-start;
   gap: 2rem;
   padding-inline: clamp(1rem, 4vw, 8rem);
   padding-block: 2rem;
-  height: auto;
-  min-height: auto;
-  overflow: visible;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .project-container {
-  height: auto;
-  min-height: auto;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  scroll-margin-top: 100px;
 }
 
 .card {
@@ -374,9 +382,18 @@ body {
 .project-title {
   display: flex;
   justify-content: center;
-  border: 3px solid black;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  border: 3px solid black;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-margin-top: 100px;
+}
+
+.project-title::-webkit-scrollbar {
+  display: none;
 }
 
 .button {
@@ -428,6 +445,7 @@ body {
   border-radius: 10px;
   transition: all 0.3s ease;
   margin: 38px;
+  flex: 0 0 auto;
 }
 
 .p,
@@ -481,7 +499,13 @@ body {
 
 .contact-section {
   min-width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding-block: 2rem;
+  overflow: hidden;
+  scroll-margin-top: 100px;
 }
 
 .contact-title {
@@ -505,6 +529,9 @@ body {
   background-color: #8db2dc;
   justify-content: space-around;
   padding-inline: 2rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .contact-card {
@@ -718,13 +745,16 @@ hr {
     font-size: 24px;
   }
 
-  .project-title {
-    padding-block: 2rem;
-  }
+.project-title {
+  padding-block: 2rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 
-  .body-container {
-    padding-inline: 1rem;
-  }
+.body-container {
+  padding-inline: 1rem;
+}
 
   .contact-container {
     padding-inline: 1rem;
@@ -749,17 +779,31 @@ hr {
 
 @media (max-width: 768px) {
   .body-container {
-    padding-inline: 2rem;
-    padding-block: 3rem;
-    height: auto;
-    min-height: auto;
-    overflow: visible;
-  }
+  padding-inline: 2rem;
+  padding-block: 2rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
-  .project-container {
-    height: auto;
-    min-height: auto;
-  }
+.project-container {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.project-title {
+  padding-block: 1.5rem;
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 
   .card {
     width: 100%;
@@ -820,13 +864,6 @@ hr {
     margin: 8px;
   }
 
-  .project-title {
-    padding-block: 2rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 0.25rem;
-  }
 
   .nav-container {
     display: flex;
@@ -952,27 +989,46 @@ hr {
     margin: 6px;
   }
 
-  .project-title {
-    padding-inline: 1rem;
-    padding-block: 1.5rem;
-    margin-bottom: 1rem;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 0.2rem;
-  }
-
   .body-container {
-    padding-inline: 1rem;
-    padding-block: 2rem;
-    height: auto;
-    min-height: auto;
-    overflow: visible;
-  }
+  padding-inline: 1rem;
+  padding-block: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
-  .project-container {
-    height: auto;
-    min-height: auto;
-  }
+.project-container {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.project-title {
+  padding-inline: 0.75rem;
+  padding-block: 1.25rem;
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.contact-section {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.contact-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
 
   .card {
     box-shadow: 6px 6px 0 #000000;
@@ -984,12 +1040,6 @@ hr {
 
   .card-overlay {
     padding: 10px;
-  }
-
-  .contact-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem;
   }
 
   .link-holder {
