@@ -764,7 +764,7 @@ hr {
   .body-container {
     padding-inline: 5rem;
     padding-block: 4rem;
-    height: auto;
+    height: 100vh;
   }
 
   .card {
@@ -936,7 +936,7 @@ hr {
 
   .body-container {
     padding-inline: 2rem;
-    height: auto;
+    height: 100vh;
   }
 
   .card {
