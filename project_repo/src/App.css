@@ -34,7 +34,7 @@ textarea {
 input:focus,
 textarea:focus {
     outline: none;
-    
+
 }
 
 textarea {
@@ -53,8 +53,11 @@ form {
     background-color: rgb(42, 109, 186);
     display: flex;
     justify-content: space-between;
-    padding-block: 1.5rem;
-    padding-inline: 3rem;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1.25rem;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+    flex-wrap: wrap;
 }
 
 .block {
@@ -89,6 +92,17 @@ form {
     box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.2);
 }
 
+.create-update,
+.cancel {
+    margin-top: 2rem;
+    width: 100%;
+    border-radius: 10px;
+    min-height: 50px;
+    height: auto;
+    font-weight: bold;
+    color: rgb(26, 11, 83);
+}
+
 
 .logout {
     padding: 0.4rem 0.8rem;
@@ -98,7 +112,7 @@ form {
     background-color: rgb(3, 48, 71);
     border: 3px solid rgb(3, 48, 71);
     font-weight: bold;
-    
+
 }
 
 .r-btn,
@@ -117,13 +131,22 @@ form {
 .r-btn:hover,
 .create-update:hover,
 .cancel:hover,
-.logout:hover  {
+.logout:hover {
     box-shadow: none;
     background-color: rgb(194, 179, 237);
 }
 
 .logout:hover {
     color: rgb(26, 11, 83);
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    min-width: 0;
 }
 
 .form-title {
@@ -146,30 +169,38 @@ form {
 .form-container {
     display: flex;
     flex-direction: column;
-    padding-block: 2rem;
-    width: 50%;
+    padding: 0;
+    width: 100%;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .content-container {
     display: flex;
     width: 100%;
+    gap: 2rem;
+    align-items: flex-start;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+    padding-block: 2rem;
 }
 
 
-/* Scope styles to this table only */
 #projects-table {
     border-collapse: collapse;
     margin-top: 1rem;
+    width: 100%;
+    table-layout: fixed;
 }
 
 #projects-table th,
 #projects-table td {
     font-weight: bold;
     color: rgb(26, 11, 83);
-    padding-bottom: .5rem;
+    padding: 0.6rem 0.5rem;
+    vertical-align: top;
+    word-break: break-word;
 }
 
-/* Optional: make buttons consistent */
 #projects-table button {
     color: rgb(26, 11, 83);
     border-radius: 6px;
@@ -177,8 +208,9 @@ form {
     background-color: rgb(100, 182, 214);
     border: 3px solid rgb(3, 48, 71);
     font-weight: bold;
-    width: 100px;
-    float: right;
+    width: 100%;
+    max-width: 110px;
+    float: none;
 }
 
 #projects-table button:hover {
@@ -196,21 +228,130 @@ form {
 
 .actions {
     display: flex;
-    
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .title-cell {
     padding-left: .25rem;
-    padding-top: .2rem; 
+    padding-top: .2rem;
 }
 
 @media (max-width: 1024px) {
     .content-container {
         flex-direction: column;
-
+        gap: 2rem;
     }
 
     .form-title {
         text-align: center;
+    }
+
+    .list-container,
+    .form-container {
+        width: 100%;
+    }
+
+    form {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .logout,
+    .block {
+        width: 100%;
+        text-align: center;
+    }
+
+    .content-container {
+        padding-inline: 1rem;
+    }
+
+    .list-container,
+    .form-container {
+        padding: 0;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .create-update {
+        margin-right: 0;
+    }
+
+    #projects-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #projects-table th,
+    #projects-table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    #projects-table button {
+        max-width: none;
+        min-width: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        padding-inline: 0.75rem;
+    }
+
+    .content-container {
+        padding-inline: 0.75rem;
+        padding-block: 1.25rem;
+    }
+
+    input,
+    textarea,
+    .submit,
+    .s-btn,
+    .r-btn,
+    .create-update,
+    .cancel {
+        width: 100%;
+    }
+}
+
+.project_repo {
+    flex: 1 1 120px;
+    min-width: 110px;
+    max-width: 100%;
+    padding: 0.65rem 0.85rem;
+    text-align: center;
+    text-decoration: none;
+    border: 3px solid #000;
+    box-shadow: 3px 3px 0 #000;
+    font-weight: 750;
+    transition: all 0.3s ease;
+}
+
+.client {
+    background: rgb(74, 175, 175);
+    color: white;
+}
+
+.project_repo {
+    background: #fbd0d7;
+    color: #000;
+}
+
+@media (max-width: 480px) {
+
+    .client,
+    .project_repo {
+        width: 100%;
+        flex: 1 1 100%;
     }
 }

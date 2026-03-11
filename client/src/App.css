@@ -16,17 +16,24 @@ body {
 }
 
 .logo {
-  width: 150px;
+  width: clamp(100px, 16vw, 150px);
+  height: auto;
+  display: block;
   background-color: rgb(35, 35, 35);
-  margin-left: 80px;
+  margin-left: 2.75rem;
 }
 
 .show {
   text-align: center;
 }
 
-.container {
+.container,
+.card-overlay,
+.form-row {
   display: grid;
+}
+
+.container {
   grid-template-columns: 1fr 1fr 1fr;
   border: 3px solid rgb(5, 5, 5);
   padding-top: 4.75rem;
@@ -34,28 +41,32 @@ body {
 
 .nav-container {
   display: flex;
-  background-color: white;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  position: relative;
 }
 
 .item1 {
-  width: 50%;
-  height: 100px;
+  width: 40%;
+  min-height: 100px;
   border: 3px solid rgb(5, 5, 5);
   display: flex;
-  padding-left: 100px;
   align-items: center;
+  padding-inline: clamp(1rem, 3vw, 2rem);
   box-shadow: inset 1px 1px 12px 5px #000000;
   background-color: rgb(35, 35, 35);
-
 }
 
 .item2 {
-  width: 50%;
+  width: 60%;
+  height: 100px;
   border: 4px solid rgb(5, 5, 5);
   display: flex;
-  padding-left: 1rem;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+  background: #fff;
 }
 
 .hamburger,
@@ -63,19 +74,18 @@ body {
   display: none;
   font-size: 1.5rem;
   background: none;
-  color: white;
+  color: black;
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+  line-height: 1;
 }
 
 .nav-content {
   display: flex;
-  /* layout when visible */
   align-items: center;
   gap: 1rem;
-  padding-inline: 1rem;
-
+  padding-inline: 0;
 }
 
 .nav-content.open {
@@ -86,8 +96,9 @@ body {
 .nav-list {
   display: flex;
   list-style: none;
-
-
+  align-items: center;
+  padding-right: 3.25rem;
+  gap: clamp(0.75rem, 2vw, 2rem);
 }
 
 .nav-container-container {
@@ -96,22 +107,19 @@ body {
   border: 3px solid rgb(5, 5, 5);
   width: 100%;
   z-index: 1000;
-
-
 }
 
 .nav-list li {
-  padding-block: 1rem;
-
+  padding-block: 0.5rem;
 }
 
 .nav-list a {
-
-  margin-inline: 30px;
-  font-size: 24px;
+  margin-inline: 0;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
   font-weight: bold;
   text-decoration: none;
   color: black;
+  white-space: nowrap;
 }
 
 .nav-list a:hover {
@@ -216,7 +224,10 @@ body {
 
 .body-container {
   display: flex;
-  padding-inline: 8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding-inline: clamp(1rem, 4vw, 8rem);
   padding-block: 2rem;
 }
 
@@ -227,39 +238,37 @@ body {
 .card {
   position: relative;
   font-family: Montserrat, sans-serif;
-  max-width: 360px;
-  height: 300px;
+  width: min(100%, 360px);
+  min-height: 300px;
+  height: auto;
   translate: -6px -6px;
   border: 3px solid #000000;
   box-shadow: 12px 12px 0 #000000;
   overflow: hidden;
   transition: all 0.3s ease;
-  margin: 20px;
+  margin: 0;
 }
 
-/* Full-bleed image that respects aspect ratio */
 .card-image {
   width: 100%;
+  object-fit: fill;
 }
 
 
 .card-spacing { display: contents; }
 
-/* 4-row grid: [title][desc][tech][buttons] */
+
 .card-overlay {
   position: absolute;
   inset: auto 0 0 0;
   padding: 12px;
   color: #fff;
-  background: linear-gradient(to top, rgba(89, 140, 191, .9) 70%, rgba(42,42,42,0) 100%);
+  background: linear-gradient(to top, rgba(89, 140, 191, 0.9) 70%, rgba(42, 42, 42, 0) 100%);
   display: grid;
   gap: 0.5rem;
-
-  /* Tune these to taste, but keep them the same for all cards */
-  --title-h: 1.75em;   /* ~2 lines of 16px text */
-  --desc-h:  3.5em;   /* ~4 lines of 13px text */
-  --tech-h:  1.25em;   /* ~2 wrapped rows of icons */
-
+  --title-h: 1.75em;
+  --desc-h: 3.5em;
+  --tech-h: 1.75em;
   grid-template-rows: var(--title-h) var(--desc-h) var(--tech-h) auto;
 }
 
@@ -369,18 +378,21 @@ body {
 }
 
 .button {
-  padding: 5px 10px;
+  flex: 1 1 120px;
+  min-width: 110px;
+  max-width: 100%;
+  padding: 0.65rem 0.85rem;
   color: white;
   text-decoration: none;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 0;
   border: 3px solid #000000;
   box-shadow: 3px 3px 0 #000000;
   font-weight: 750;
   background: rgb(74, 175, 175);
   transition: all 0.3s ease;
   cursor: pointer;
-  width: 80px;
+  width: auto;
 }
 
 .button:hover {
@@ -521,7 +533,6 @@ body {
 }
 
 .form-row {
-  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
@@ -677,10 +688,14 @@ hr {
   background-color: #808080;
 }
 
+
 .link-holder {
   display: flex;
-  gap: 25px;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  width: 100%;
 }
+
 
 .contact-card-body span {
   font-size: 13px;
@@ -701,174 +716,84 @@ hr {
 }
 
 
-
-
-
 @media (max-width: 1024px) {
-  .nav-container-container {
-    flex-direction: column;
-    align-items: flex-start;
-    border: 5px solid black;
-  }
-
-  .nav-container {
-    width: 100%;
-  }
-
-  /* Drawer */
-  .nav-content {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(80vw, 320px);
-    height: 100dvh;
-    transform: translateX(100%);
-    transition: transform 200ms ease;
-    background: #0b0b0c;
-    padding: 1rem;
-    z-index: 1000;
-
-    /* prevent the stray scrollbar while closed */
-    overflow: hidden;
-    /* <— key line */
-    visibility: hidden;
-    /* inherited from base */
-    pointer-events: none;
-    /* inherited from base */
-    flex-direction: column;
-    /* vertical links in drawer */
-    gap: 1rem;
-  }
-
-  .nav-content.open {
-    transform: translateX(0);
-    overflow: auto;
-    /* allow scrolling when open */
-    visibility: visible;
-    pointer-events: auto;
-    box-shadow: -6px 0 16px rgba(0, 0, 0, .35);
-
-  }
-
-  .item1 {
-    width: 70%;
-    padding: 10px;
-  }
-
-  .item2 {
-    width: 30%;
-    justify-content: center;
-    position: relative;
-  }
-
-  .item2 .hamburger {
-    display: block;
-    margin-right: 20px;
-    color: black;
-  }
-
-  .item2 .hamburger:hover {
-    scale: 1.1;
-    color: rgb(32, 172, 167);
-  }
-
-
-  .item3 {
-    justify-content: center;
-
-  }
-
-  .nav-list {
-    flex-direction: column;
-    padding: 0;
-    margin-top: 2rem;
-  }
-
-  .nav-list li {
-    padding: .5rem 0;
-  }
-
-  /* If drawer background is dark, make links readable */
-  .nav-list a {
-    color: #fff;
-  }
-
-
-  .item11,
-  .item12,
-  .item13,
-  .item14,
-  .item15,
-  .item16,
-  .item17,
-  .item18,
-  .item19 {
-    display: flex;
-    justify-content: center;
-  }
-
-  .item11 .card,
-  .item12 .card,
-  .item13 .card,
-  .item14 .card,
-  .item15 .card,
-  .item16 .card,
-  .item17 .card,
-  .item18 .card,
-  .item19 .card {
-    padding: 0;
-    margin: 0;
-
-
-  }
-
-  .body-container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-  .ransom {
-    margin: 0;
-    width: 100%;
-    margin-left: 175px;
-
-  }
-
-  .nav-content .close {
-    display: none;
-    /* hidden by default while drawer is closed */
-  }
-
-  .nav-content.open .close {
-    display: block;
-    position: absolute;
-    top: 1.25rem;
-    right: .5rem;
-    font-size: 2rem;
-    padding: .25rem .5rem;
-    background: transparent;
-    color: #fff;
-    border: 0;
-    cursor: pointer;
-    z-index: 1001;
-    /* above drawer contents */
-    /* optional: larger tap target */
-    inline-size: 44px;
-    block-size: 44px;
-  }
-
-  .nav-content.open .close:hover {
-    scale: 1.1;
-    color: rgb(32, 172, 167);
+  .p,
+  .r,
+  .o,
+  .j,
+  .e,
+  .c,
+  .t,
+  .s {
+    height: 90px;
+    width:90px;
+    margin: 5px;
+    font-size: 24px;
   }
 
   .project-title {
-    display: flex;
-    height: 200px;
-    justify-content: center;
-    padding-inline: 3rem
+    padding-block: 2rem;
+  }
+
+  .body-container {
+    padding-inline: 1rem;
+  }
+
+  .contact-container {
+    padding-inline: 1rem;
+  }
+
+  hr {
+    border: 9.95px solid transparent;
+  }
+
+  .contact-links {
+    padding-inline: 2rem;
+    margin-top: 5px;
+  }
+
+  .contact-link {
+    width: 100px;
+    height: 100px;
+    margin-inline: 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .body-container {
+    padding-inline: 5rem;
+    padding-block: 4rem;
+  }
+
+  .card {
+    width: 100%;
+    height: 375px;
+    margin-bottom: 20px;
+  }
+
+  .card-image {
+    object-fit: fill;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    padding-inline: 1.35rem;
+  }
+
+  .link-holder {
+    flex-direction: row;
+  }
+
+  .contact-links {
+    padding-inline: 2rem;
+  }
+
+  .contact-link {
+    width: 100px;
+    height: 100px;
+    margin-inline: 16px;
+    font-size: 16px;
   }
 
   .p,
@@ -879,30 +804,225 @@ hr {
   .c,
   .t,
   .s {
-    width: 50px;
-    height: 50px;
-    margin:8px;
+    height: 65px;
+    width:65px;
+    margin: 5px;
+    font-size: 24px;
+  }
+
+  .project-title {
+    padding-block: 2rem;
+  }
+
+
+  .nav-container {
+    padding: 0;
+  }
+
+  .item1 {
+    width: auto;
+    flex: 0 0 auto;
+    min-height: 80px;
+    padding-inline: 0.75rem;
+  }
+
+  .item2 {
+    width: auto;
+    flex: 1 1 auto;
+    min-height: 80px;
+    justify-content: flex-end;
+    position: relative;
+    padding-inline: 0.75rem;
   }
 
   .logo {
-    margin-left: 1rem;
+    width: 110px;
   }
 
-  .contact-section {
-    padding: 4rem 1rem;
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .contact-title {
-    font-size: 1.6rem;
+  .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
   }
 
-  .form-row {
+  .nav-content {
+    position: absolute;
+    top: 100%;
+    right: -8px;
+    width: 100vw;
+    background: #ffffff;
+    border: 9px solid #000;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    display: none;
+    z-index: 1200;
+    
+  }
+
+  .nav-content.open {
+    display: flex;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .nav-list li {
+    width: 100%;
+    padding-block: 0;
+  }
+
+  .nav-list a {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    border: 2px solid transparent;
+  }
+
+  .nav-list a:hover {
+    text-decoration: none;
+    border-color: rgb(48, 169, 230);
+    background: rgba(48, 169, 230, 0.08);
+  }
+
+  .item5 {
+    border: 3px solid black;
+  }
+
+  .item1,
+  .item2 {
+    height: 100px;
+  }
+
+  .show {
+    font-size: 24px;
+  }
+
+  .card-image {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .p,
+  .r,
+  .o,
+  .j,
+  .e,
+  .c,
+  .t,
+  .s {
+    height: 40px;
+    margin: 5px;
+    font-size: 24px;
+  }
+
+  .project-title {
+    padding-inline: 1.5rem;
+  }
+
+  .body-container {
+    padding-inline: 2rem;
+  }
+
+  .card {
+    box-shadow: 6px 6px 0 #000000;
+  }
+
+  .card-image {
+    height: 220px;
+  }
+
+  .card-overlay {
+    padding: 10px;
+  }
+
+  .link-holder {
+    flex-direction: row;
+  }
+
+  .contact-links {
+    padding-inline: 2rem;
+  }
+
+  .contact-link {
+    width: 83px;
+    height: 80px;
+    font-size: 16px;
+  }
+
+  .button {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .item1,
+  .item2 {
+    height: 100px;
+  }
+    
+  .item3 {
+    padding-inline: 2rem;
+  }
+
+  .show {
+    font-size: 24px;
+  }
+
+  .logo {
+    width: 95px;
+  }
+
+  .hamburger,
+  .close {
+    font-size: 1.35rem;
+    padding: 0.35rem;
+  }
+
+  .nav-content {
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    right: -3px;
+    width: calc(100vw - .25rem);
+    border: 3px solid black;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    padding: 0.25rem;
+  }
+
+  .container {
     grid-template-columns: 1fr;
   }
 
-  .contact-card,
-  .contact-head {
-    box-shadow: 8px 8px 0 #000;
+  .item4,
+  .item5 {
+    display: flex;
   }
-  
+
+  .item4 {
+    height: 200px;
+  }
+
+  .item5 {
+    max-height: none;
+    overflow: visible;
+    flex-direction: column;
+    padding: 1rem;
+    border: 3px solid black;
+  }
 }

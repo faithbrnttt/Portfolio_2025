@@ -7,6 +7,7 @@ import Nav from './components/Nav'
 import singleKey from './assets/single-key.mp3'
 import Contact from "./components/Contact";
 import ProjectCards from './components/ProjectCards'
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export function playSound() {
   const audio = new Audio(singleKey);
@@ -29,7 +30,7 @@ function App() {
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
             >
-              <FontAwesomeIcon icon="faBars" />
+              <FontAwesomeIcon icon={faBars} />
             </button>
 
             {/* Drawer */}
@@ -39,7 +40,7 @@ function App() {
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <FontAwesomeIcon icon="faXmark" />
+                <FontAwesomeIcon icon={faXmark} />
               </button>
 
               <Nav closeMenu={() => setMenuOpen(false)} />
