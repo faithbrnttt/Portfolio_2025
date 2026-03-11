@@ -764,7 +764,8 @@ hr {
   .body-container {
     padding-inline: 5rem;
     padding-block: 4rem;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
   }
 
   .card {
@@ -826,6 +827,10 @@ hr {
 
   .project-title {
     padding-block: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
   }
 
   .nav-container {
@@ -948,11 +953,17 @@ hr {
 
   .project-title {
     padding-inline: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem;
   }
 
   .body-container {
     padding-inline: 2rem;
-    height: 100vh;
+    padding-block: 3rem;
+    min-height: 100vh;
+    height: auto;
   }
 
   .card {
