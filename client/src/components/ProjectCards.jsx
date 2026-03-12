@@ -8,6 +8,10 @@ import {
     faReact, faJs, faNodeJs, faHtml5, faCss3Alt, faPython, faAws
 } from "@fortawesome/free-brands-svg-icons";
 
+import {
+    faMicrochip
+} from "@fortawesome/free-solid-svg-icons";
+
 const API = import.meta.env.VITE_API_URL || "";
 
 // Map of normalized tech name -> JSX icon
@@ -19,6 +23,7 @@ const ICON_MAP = {
     html: <FontAwesomeIcon icon={faHtml5} />,
     css: <FontAwesomeIcon icon={faCss3Alt} />,
     python: <FontAwesomeIcon icon={faPython} />,
+    microchip: <FontAwesomeIcon icon={faMicrochip} />,
 
     mongodb: <SiMongodb />,
     "mongo db": <SiMongodb />,
