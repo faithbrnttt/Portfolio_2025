@@ -112,7 +112,9 @@ export default function ProjectsCards() {
                         <div className="card-overlay">
                             <div className="card-spacing">
                                 <h3 className="card-title">{p.title}</h3>
-                                <p className="card-desc">{p.description}</p>
+                                <div data-fulltext={p.description} className="card-desc-wrap">
+                                    <p className="card-desc">{p.description}</p>
+                                </div>
 
                                 {/* Tech icons */}
                                 <div className="t-icons">
