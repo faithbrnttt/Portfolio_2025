@@ -40,6 +40,10 @@ body {
   height: 100vh;  /* first section fills remaining screen */
   align-content: start;
   background-image: url("./assets/background.png");
+  background-size:auto;
+  background-repeat: no-repeat;
+  background-color: orange;
+
 }
 
 .nav-container-container {
@@ -782,7 +786,7 @@ hr {
 
 .contact-container {
   padding-inline: 1rem;
-  padding-block: 8rem;
+  padding-block: 2rem;
 }
 
   hr {
@@ -800,6 +804,11 @@ hr {
     margin: 0;
     font-size: 16px;
   }
+
+  .nav-list a {
+    font-size: 24px;
+  }
+  
 }
 
 @media (max-width: 768px) {
@@ -823,7 +832,6 @@ hr {
   margin-bottom: 0;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 0.25rem;
   overflow-x: hidden;
   overflow-y: hidden;
 }

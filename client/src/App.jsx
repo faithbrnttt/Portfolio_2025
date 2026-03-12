@@ -1,6 +1,6 @@
 import './App.css'
 import logo from './assets/logo.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './fontawesome';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Nav from './components/Nav'
@@ -18,7 +18,20 @@ export function playSound() {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setMenuOpen((prev) => {
+        if (!prev) return prev;
+        return false;
+      });
+    };
 
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
       <div className="nav-container-container">
@@ -67,14 +80,14 @@ function App() {
 
 
       </div>
-      
+
       <div className="item8"></div>
       <div id="prodivide" className="divider">
 
         <div className="item9"></div>
         <div className="item10"></div>
       </div>
-      
+
       <div id="pcont" className="project-container">
         <div id="projects" className="project-title">
           <div onClick={playSound} className="p">P</div>
@@ -94,7 +107,7 @@ function App() {
         <div className="item11"></div>
         <div className="item12"></div>
       </div>
-  
+
 
       <div className="contact-container">
         <Contact />
