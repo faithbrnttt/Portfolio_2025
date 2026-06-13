@@ -1,23 +1,23 @@
-🧠 Portfolio_2025
+Portfolio_2025
 
 A full-stack developer portfolio and project management system designed to showcase projects dynamically while providing an internal admin interface for content control.
 
-🚀 Overview
+Overview
 
 Portfolio_2025 is a dual-interface application consisting of:
 
-🌐 Public Portfolio Website – Displays projects dynamically
-🔒 Admin Dashboard – Allows full CRUD control over projects, images, and ordering
+Public Portfolio Website – Displays projects dynamically
+Admin Dashboard – Allows full CRUD control over projects, images, and ordering
 
 Built to move beyond static portfolios by enabling real-time updates, structured data management, and scalable deployment.
 
-🏗️ Architecture
+Architecture
 Client (Portfolio UI) ─────┐
                           │
 Admin Panel (project_repo) ───→ Express API → MongoDB
                           │
                           └────────→ AWS S3 (Image Storage)
-🧩 Tech Stack
+Tech Stack
 Frontend
 React (Vite)
 CSS (custom styling – faithb.dev style)
@@ -33,7 +33,7 @@ Apache2 (reverse proxy)
 Cloudflare (DNS + security)
 PM2 (process management)
 GitHub Actions (CI/CD auto-deploy)
-✨ Features
+Features
 Public Portfolio
 Dynamic project rendering from API
 Image support via AWS S3
@@ -63,7 +63,7 @@ AWS_ACCESS_KEY_ID=your_key
 AWS_SECRET_ACCESS_KEY=your_secret
 AWS_REGION=us-east-2
 AWS_BUCKET_NAME=your_bucket
-🖥️ Local Development
+Local Development
 1. Clone the repo
 git clone https://github.com/faithbrnttt/Portfolio_2025.git
 cd Portfolio_2025
@@ -76,18 +76,18 @@ npm run dev
 
 # Client
 npm run dev
-🚀 Deployment Workflow
+Deployment Workflow
 Push to GitHub triggers GitHub Actions
 SSH into server using appleboy/ssh-action
 Runs deployment script
 Builds app in /opt/apps/Portfolio_2025
 Deploys to /var/www/Portfolio2025
 Served via Apache reverse proxy
-🔐 Security
+Security
 Admin routes protected via Bearer token
 Optional admin “kill switch” for disabling write operations
 API routed through /api for production isolation
-🧠 Key Design Decisions
+Key Design Decisions
 Separation of concerns
 Portfolio UI and admin system are independent but connected via API
 Dynamic over static
@@ -96,13 +96,13 @@ Scalable image handling
 Uses AWS S3 instead of local storage
 Order persistence
 Custom order field enables drag-and-drop UI with backend sync
-📊 Future Improvements
+Future Improvements
 Authentication system upgrade (JWT refresh / roles)
 Analytics dashboard for project views
 Dark/light theme toggle
 CI validation checks before deploy
 Docker containerization
-👩‍💻 Author
+Author
 
 Faith Burnett
 
